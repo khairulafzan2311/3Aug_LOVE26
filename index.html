@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Parisienne&family=EB+Garamond:ital@0;1&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --wine:#2b1016;
+    --wine-deep:#1a0a0d;
+    --ivory:#f4e9dd;
+    --gold:#c9a15a;
+    --gold-soft:#e3c98f;
+    --rose:#c98f8a;
+    --line: rgba(244,233,221,0.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    min-height:100vh;
+    background:
+      radial-gradient(ellipse at 50% 0%, #3a1620 0%, var(--wine) 45%, var(--wine-deep) 100%);
+    font-family:'EB Garamond', serif;
+    color:var(--ivory);
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* full-page background photo — replace the src below with your own image */
+  .page-bg{position:fixed;inset:0;z-index:0;overflow:hidden;}
+  .page-bg-img{width:100%;height:100%;object-fit:cover;display:block;}
+  .page-bg-overlay{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:linear-gradient(180deg, rgba(26,10,13,0.55) 0%, rgba(26,10,13,0.68) 55%, rgba(20,8,10,0.82) 100%);
+  }
+
+  /* ambient floating particles */
+  .petals{position:fixed;inset:0;pointer-events:none;z-index:1;}
+  .petal{
+    position:absolute;
+    top:-5%;
+    width:10px;height:10px;
+    background:var(--rose);
+    opacity:0.35;
+    border-radius:0 100% 0 100%;
+    animation:fall linear infinite;
+  }
+  @keyframes fall{
+    0%{transform:translateY(0) rotate(0deg);}
+    100%{transform:translateY(110vh) rotate(360deg);}
+  }
+
+  .stage{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:2;
+    opacity:1;
+    transition:opacity 0.6s ease;
+  }
+  .stage.fade-out{opacity:0;}
+  .stage.hidden{display:none;}
+
+  /* ---------- ENVELOPE (signature element) ---------- */
+  /* base measurements, ported from the user's SCSS:
+     $env-width:280px; $env-height:180px; $heart-width:50px; $env-border-radius:6px; */
+  .envelope-wrap{
+    perspective:1600px;
+    cursor:pointer;
+    user-select:none;
+    transform:scale(var(--env-scale, 1));
+    transform-origin:top center;
+  }
+  @media (max-width:480px){ .envelope-wrap{ --env-scale:0.85; } }
+  @media (max-width:360px){ .envelope-wrap{ --env-scale:0.72; } }
+
+  .envelope{
+    position:relative;
+    width:280px;
+    height:180px;
+    margin:0 auto;
+    border-bottom-left-radius:6px;
+    border-bottom-right-radius:6px;
+    background-color:#6e1f22;
+    box-shadow:0 20px 45px rgba(0,0,0,0.4);
+    transition:transform 0.6s ease;
+  }
+  .envelope-wrap:hover .envelope{transform:translateY(-4px);}
+
+  .front{
+    position:absolute;
+    top:0;left:0;
+    width:0;
+    height:0;
+  }
+
+  /* the flap: a triangle built from borders, folded down over the pocket */
+  .flap{
+    border-left:140px solid transparent;
+    border-right:140px solid transparent;
+    border-bottom:82px solid transparent;
+    border-top:98px solid #6e1f22;
+    transition:transform 0.6s ease, opacity 0.5s ease;
+    pointer-events:none;
+    z-index:3;
+    filter:drop-shadow(0 3px 4px rgba(0,0,0,0.2));
+  }
+  .envelope.open .flap{
+    transform:translateY(-60px) scale(0.92);
+    opacity:0;
+  }
+
+  /* the pocket: two side triangles + a bottom trapezoid, also built from borders */
+  .pocket{
+    border-left:140px solid #dcb877;
+    border-right:140px solid #dcb877;
+    border-bottom:90px solid #c9a15a;
+    border-top:90px solid transparent;
+    border-bottom-left-radius:6px;
+    border-bottom-right-radius:6px;
+    pointer-events:none;
+    z-index:2;
+  }
+
+  .seal{
+    position:absolute;
+    top:98px;left:50%;
+    transform:translate(-50%,-50%);
+    width:60px;height:60px;
+    border-radius:50%;
+    overflow:hidden;
+    background:var(--ivory);
+    box-shadow:0 6px 14px rgba(0,0,0,0.45), 0 0 0 3px rgba(244,233,221,0.85);
+    z-index:4;
+    transition:opacity 0.4s ease, transform 0.4s ease;
+  }
+  .envelope.open .seal{opacity:0;transform:translate(-50%,-50%) scale(0.5);}
+  .seal-img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  .seal-placeholder{
+    display:none;
+    width:100%;
+    height:100%;
+    align-items:center;
+    justify-content:center;
+    background:repeating-linear-gradient(45deg,#e7dccb,#e7dccb 6px,#ddd0ba 6px,#ddd0ba 12px);
+    text-align:center;
+  }
+  .seal-placeholder span{
+    font-family:'EB Garamond',serif;
+    font-style:italic;
+    font-size:0.62rem;
+    line-height:1.15;
+    color:#8a7a63;
+  }
+
+  .env-letter{
+    position:absolute;
+    left:6%;right:6%;
+    bottom:6%;
+    height:0%;
+    opacity:0;
+    visibility:hidden;
+    background:var(--ivory);
+    border-radius:2px;
+    box-shadow:none;
+    z-index:1;
+    transition:height 0.7s ease 0.3s, bottom 0.7s ease 0.3s, opacity 0.3s ease 0.3s, visibility 0s linear 0.3s, box-shadow 0.3s ease 0.3s;
+    overflow:hidden;
+  }
+  .envelope.open .env-letter{
+    height:130%;
+    bottom:40%;
+    opacity:1;
+    visibility:visible;
+    box-shadow:0 10px 30px rgba(0,0,0,0.3);
+    transition:height 0.7s ease 0.3s, bottom 0.7s ease 0.3s, opacity 0.3s ease 0.3s, visibility 0s linear 0.3s, box-shadow 0.3s ease 0.3s;
+  }
+
+  .hint{
+    margin-top:28px;
+    text-align:center;
+    font-size:0.95rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--gold-soft);
+    opacity:0.85;
+    animation:pulse 2.4s ease-in-out infinite;
+  }
+  @keyframes pulse{
+    0%,100%{opacity:0.5;}
+    50%{opacity:1;}
+  }
+  .envelope-wrap.hide{
+    display:none;
+  }
+
+  /* ---------- LETTER PAGE ---------- */
+  .letter-page{
+    display:none;
+    max-width:640px;
+    width:92vw;
+    margin:60px auto 100px;
+    background:var(--ivory);
+    color:#2b1016;
+    padding:min(8vw,60px) min(7vw,56px);
+    border-radius:3px;
+    box-shadow:0 40px 90px rgba(0,0,0,0.5);
+    position:relative;
+    z-index:2;
+    animation:rise 1s ease both;
+  }
+  @keyframes rise{
+    from{opacity:0;transform:translateY(40px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  .letter-page.show{display:block;}
+
+  .eyebrow{
+    text-align:center;
+    font-family:'EB Garamond',serif;
+    font-style:italic;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    font-size:0.78rem;
+    color:var(--rose);
+    margin-bottom:6px;
+  }
+  h1.title{
+    font-family:'Parisienne',cursive;
+    font-weight:400;
+    text-align:center;
+    font-size:clamp(2.4rem,7vw,3.4rem);
+    color:#6e1f22;
+    margin:0 0 28px;
+  }
+  .divider{
+    width:80px;height:1px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+    margin:0 auto 32px;
+  }
+  .body-text{
+    font-size:1.18rem;
+    line-height:1.85;
+    font-family:'Cormorant Garamond',serif;
+  }
+  .body-text p{margin:0 0 22px;}
+  .body-text .placeholder{
+    background:rgba(201,161,90,0.18);
+    border-radius:3px;
+    padding:0 4px;
+  }
+  .signoff{
+    margin-top:36px;
+    text-align:right;
+    font-family:'Parisienne',cursive;
+    font-size:1.8rem;
+    color:#6e1f22;
+  }
+
+  /* photo strip */
+  .photos{
+    display:flex;
+    gap:18px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin:36px 0 8px;
+  }
+  .polaroid{
+    background:#fff;
+    padding:10px 10px 26px;
+    box-shadow:0 12px 24px rgba(0,0,0,0.25);
+    transform:rotate(var(--r,-3deg));
+    width:132px;
+    transition:transform 0.3s ease;
+  }
+  .polaroid:nth-child(2){--r:2deg;}
+  .polaroid:nth-child(3){--r:-1.5deg;}
+  .polaroid:hover{transform:rotate(0deg) scale(1.05);}
+  .polaroid .frame{
+    width:100%;
+    aspect-ratio:1/1;
+    background:repeating-linear-gradient(45deg,#e7dccb,#e7dccb 8px,#ddd0ba 8px,#ddd0ba 16px);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'EB Garamond',serif;
+    font-style:italic;
+    font-size:0.72rem;
+    color:#8a7a63;
+    text-align:center;
+    padding:6px;
+  }
+  .polaroid .cap{
+    display:block;
+    text-align:center;
+    font-family:'EB Garamond',serif;
+    font-style:italic;
+    font-size:0.78rem;
+    color:#6e1f22;
+    margin-top:8px;
+  }
+
+  .back-btn{
+    display:block;
+    width:fit-content;
+    position:static;
+    margin:0 auto 8px;
+    font-size:1.4rem;
+    line-height:1;
+    background:none;
+    border:none;
+    color:var(--rose);
+    opacity:0.75;
+    cursor:pointer;
+    padding:8px;
+    z-index:10;
+    pointer-events:auto;
+    transition:opacity 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  }
+  .back-btn:hover{
+    opacity:1;
+    color:#6e1f22;
+    transform:scale(1.15);
+  }
+
+  .more-wrap{
+    text-align:center;
+    margin-top:38px;
+  }
+  .more-btn{
+    font-family:'EB Garamond',serif;
+    font-style:italic;
+    font-size:1rem;
+    letter-spacing:0.04em;
+    background:none;
+    border:1px solid rgba(110,31,34,0.4);
+    color:#6e1f22;
+    padding:10px 26px;
+    border-radius:30px;
+    cursor:pointer;
+    transition:background 0.3s ease, color 0.3s ease;
+  }
+  .more-btn:hover{
+    background:#6e1f22;
+    color:var(--ivory);
+  }
+
+  /* ---------- GALLERY PAGE ---------- */
+  .gallery-page{
+    display:none;
+    max-width:820px;
+    width:92vw;
+    margin:60px auto 100px;
+    background:var(--ivory);
+    color:#2b1016;
+    padding:min(8vw,60px) min(6vw,56px);
+    border-radius:3px;
+    box-shadow:0 40px 90px rgba(0,0,0,0.5);
+    position:relative;
+    z-index:2;
+    animation:rise 0.8s ease both;
+  }
+  .gallery-page.show{display:block;}
+  .gallery-title{font-size:clamp(2.2rem,6vw,3rem);}
+  .gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:28px;
+    margin-top:20px;
+  }
+  .g-item{text-align:center;}
+  .g-frame{
+    aspect-ratio:1/1;
+    background:repeating-linear-gradient(45deg,#e7dccb,#e7dccb 8px,#ddd0ba 8px,#ddd0ba 16px);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'EB Garamond',serif;
+    font-style:italic;
+    color:#8a7a63;
+    border-radius:2px;
+    box-shadow:0 10px 20px rgba(0,0,0,0.15);
+  }
+  .g-text{
+    font-family:'Cormorant Garamond',serif;
+    font-size:1rem;
+    margin-top:12px;
+    line-height:1.5;
+  }
+
+  .footer-note{
+    text-align:center;
+    font-size:0.8rem;
+    color:rgba(244,233,221,0.4);
+    padding-bottom:30px;
+    font-family:'EB Garamond',serif;
+    letter-spacing:0.05em;
+    position:relative;
+    z-index:2;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .petal, .hint{animation:none;}
+    .envelope, .flap, .env-letter, .seal{transition:none;}
+  }
+</style>
+</head>
+
+
+  
+<body>
+
+<div class="page-bg">
+  <img class="page-bg-img" src="Side_by_side2.PNG" alt=""
+       onerror="this.style.display='none';">
+</div>
+<div class="page-bg-overlay"></div>
+
+<div class="petals" id="petals"></div>
+
+<div class="stage" id="stage">
+  <div>
+    <div class="envelope-wrap" id="envelopeWrap">
+      <div class="envelope" id="envelope">
+        <div class="env-letter"></div>
+        <div class="front pocket"></div>
+        <div class="front flap"></div>
+        <div class="seal">
+          <img class="seal-img" src="YOUR-PHOTO-URL-HERE.jpg" alt=""
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="seal-placeholder">
+            <span>your<br>photo</span>
+          </div>
+        </div>
+
+
+
+      </div>
+      <div class="hint">tap to open</div>
+    </div>
+  </div>
+</div>
+
+<div class="letter-page" id="letterPage">
+  <button class="back-btn" id="toEnvelope" aria-label="Return to envelope" title="Return to envelope">♥</button>
+  <div class="eyebrow">a little something for</div>
+  <h1 class="title">[Partner's Name]</h1>
+  <div class="divider"></div>
+
+  <div class="body-text">
+    <p>My dearest <span class="placeholder">[Partner's Name]</span>,</p>
+    <p>Happy birthday to the person who makes every ordinary day feel like something worth remembering. <span class="placeholder">[This is where a favorite memory will go — a night, a trip, a small moment that still makes you smile.]</span></p>
+    <p><span class="placeholder">[This is where an inside joke, a habit you love, or something only the two of you would understand goes.]</span></p>
+    <p>I could try to list every reason I love you, but I'd run out of page before I ran out of reasons. So instead, here's just one: <span class="placeholder">[the thing you love most about them]</span>.</p>
+    <p>Here's to another year of us.</p>
+  </div>
+
+  <div class="photos">
+    <div class="polaroid"><div class="frame">photo 1</div><span class="cap">[caption]</span></div>
+    <div class="polaroid"><div class="frame">photo 2</div><span class="cap">[caption]</span></div>
+    <div class="polaroid"><div class="frame">photo 3</div><span class="cap">[caption]</span></div>
+  </div>
+
+  <div class="signoff">— [Your Name]</div>
+
+  <div class="more-wrap">
+    <button class="more-btn" id="toGallery">our story so far →</button>
+  </div>
+</div>
+
+<div class="gallery-page" id="galleryPage">
+  <div class="eyebrow">every moment</div>
+  <h1 class="title gallery-title">Our Story</h1>
+  <div class="divider"></div>
+
+  <div class="gallery-grid">
+    <div class="g-item">
+      <div class="g-frame">photo</div>
+      <p class="g-text"><span class="placeholder">[caption or short memory about this photo]</span></p>
+    </div>
+    <div class="g-item">
+      <div class="g-frame">photo</div>
+      <p class="g-text"><span class="placeholder">[caption or short memory about this photo]</span></p>
+    </div>
+    <div class="g-item">
+      <div class="g-frame">photo</div>
+      <p class="g-text"><span class="placeholder">[caption or short memory about this photo]</span></p>
+    </div>
+    <div class="g-item">
+      <div class="g-frame">photo</div>
+      <p class="g-text"><span class="placeholder">[caption or short memory about this photo]</span></p>
+    </div>
+    <div class="g-item">
+      <div class="g-frame">photo</div>
+      <p class="g-text"><span class="placeholder">[caption or short memory about this photo]</span></p>
+    </div>
+    <div class="g-item">
+      <div class="g-frame">photo</div>
+      <p class="g-text"><span class="placeholder">[caption or short memory about this photo]</span></p>
+    </div>
+  </div>
+
+  <div class="more-wrap">
+    <button class="more-btn" id="toLetter">← back to the letter</button>
+  </div>
+</div>
+
+<div class="footer-note">made with love, just for you</div>
+
+<script>
+  // ambient petals
+  const petalContainer = document.getElementById('petals');
+  const petalCount = 18;
+  for(let i=0;i<petalCount;i++){
+    const p = document.createElement('div');
+    p.className='petal';
+    p.style.left = Math.random()*100+'vw';
+    p.style.width = p.style.height = (6+Math.random()*8)+'px';
+    p.style.animationDuration = (10+Math.random()*10)+'s';
+    p.style.animationDelay = (Math.random()*10)+'s';
+    p.style.opacity = 0.2+Math.random()*0.3;
+    petalContainer.appendChild(p);
+  }
+
+  const envelope = document.getElementById('envelope');
+  const envelopeWrap = document.getElementById('envelopeWrap');
+  const letterPage = document.getElementById('letterPage');
+  const stage = document.getElementById('stage');
+
+  envelopeWrap.addEventListener('click', () => {
+    if(envelope.classList.contains('open')) return;
+    envelope.classList.add('open');
+    setTimeout(() => {
+      stage.classList.add('fade-out');
+      setTimeout(() => {
+        stage.classList.add('hidden');
+        letterPage.classList.add('show');
+      }, 550);
+    }, 1000);
+  });
+
+  // navigation between letter and gallery
+  const letterPageEl = document.getElementById('letterPage');
+  const galleryPage = document.getElementById('galleryPage');
+  document.getElementById('toGallery').addEventListener('click', () => {
+    letterPageEl.classList.remove('show');
+    galleryPage.classList.add('show');
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+  document.getElementById('toLetter').addEventListener('click', () => {
+    galleryPage.classList.remove('show');
+    letterPageEl.classList.add('show');
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+
+  document.getElementById('toEnvelope').addEventListener('click', () => {
+    letterPageEl.classList.remove('show');
+    galleryPage.classList.remove('show');
+    envelope.classList.remove('open');
+    stage.classList.remove('hidden');
+    requestAnimationFrame(() => { stage.classList.remove('fade-out'); });
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+</script>
+
+</body>
+</html>
