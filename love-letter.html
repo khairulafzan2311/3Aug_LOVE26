@@ -65,143 +65,157 @@
   .stage.fade-out{opacity:0;}
   .stage.hidden{display:none;}
 
-  /* ---------- ENVELOPE (signature element) ---------- */
-  /* base measurements, ported from the user's SCSS:
-     $env-width:280px; $env-height:180px; $heart-width:50px; $env-border-radius:6px; */
-  .envelope-wrap{
+  /* ---------- ENVELOPE (680 × 440) ---------- */
+
+.envelope-wrap{
     perspective:1600px;
     cursor:pointer;
     user-select:none;
-    transform:scale(var(--env-scale, 1));
+    transform:scale(var(--env-scale,1));
     transform-origin:top center;
-  }
-  @media (max-width:480px){ .envelope-wrap{ --env-scale:0.85; } }
-  @media (max-width:360px){ .envelope-wrap{ --env-scale:0.72; } }
+}
 
-  .envelope{
+@media (max-width:768px){
+    .envelope-wrap{
+        --env-scale:0.75;
+    }
+}
+
+@media (max-width:480px){
+    .envelope-wrap{
+        --env-scale:0.52;
+    }
+}
+
+@media (max-width:360px){
+    .envelope-wrap{
+        --env-scale:0.42;
+    }
+}
+
+.envelope{
     position:relative;
-    width:280px;
-    height:180px;
+    width:680px;
+    height:440px;
     margin:0 auto;
     border-bottom-left-radius:6px;
     border-bottom-right-radius:6px;
-    background-color:#6e1f22;
-    box-shadow:0 20px 45px rgba(0,0,0,0.4);
-    transition:transform 0.6s ease;
-  }
-  .envelope-wrap:hover .envelope{transform:translateY(-4px);}
+    background:#1F4E79;
+    box-shadow:0 20px 45px rgba(0,0,0,.4);
+    transition:transform .6s ease;
+}
 
-  .front{
+.envelope-wrap:hover .envelope{
+    transform:translateY(-4px);
+}
+
+.front{
     position:absolute;
-    top:0;left:0;
+    inset:0;
     width:0;
     height:0;
-  }
+}
 
-  /* the flap: a triangle built from borders, folded down over the pocket */
-  .flap{
-    border-left:140px solid transparent;
-    border-right:140px solid transparent;
-    border-bottom:82px solid transparent;
-    border-top:98px solid #6e1f22;
-    transition:transform 0.6s ease, opacity 0.5s ease;
-    pointer-events:none;
-    z-index:3;
-    filter:drop-shadow(0 3px 4px rgba(0,0,0,0.2));
-  }
-  .envelope.open .flap{
-    transform:translateY(-60px) scale(0.92);
-    opacity:0;
-  }
-
-  /* the pocket: two side triangles + a bottom trapezoid, also built from borders */
-  .pocket{
-    border-left:140px solid #dcb877;
-    border-right:140px solid #dcb877;
-    border-bottom:90px solid #c9a15a;
-    border-top:90px solid transparent;
-    border-bottom-left-radius:6px;
-    border-bottom-right-radius:6px;
-    pointer-events:none;
-    z-index:2;
-  }
-
-  .seal{
-    position:absolute;
-    top:98px;left:50%;
-    transform:translate(-50%,-50%);
-    width:60px;height:60px;
-    border-radius:50%;
-    overflow:hidden;
-    background:var(--ivory);
-    box-shadow:0 6px 14px rgba(0,0,0,0.45), 0 0 0 3px rgba(244,233,221,0.85);
-    z-index:4;
-    transition:opacity 0.4s ease, transform 0.4s ease;
-  }
-  .envelope.open .seal{opacity:0;transform:translate(-50%,-50%) scale(0.5);}
-  .seal-img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-  }
-  .seal-placeholder{
-    display:none;
-    width:100%;
-    height:100%;
-    align-items:center;
-    justify-content:center;
-    background:repeating-linear-gradient(45deg,#e7dccb,#e7dccb 6px,#ddd0ba 6px,#ddd0ba 12px);
-    text-align:center;
-  }
-  .seal-placeholder span{
-    font-family:'EB Garamond',serif;
-    font-style:italic;
-    font-size:0.62rem;
-    line-height:1.15;
-    color:#8a7a63;
-  }
-
-  .env-letter{
-    position:absolute;
-    left:6%;right:6%;
-    bottom:6%;
-    height:0%;
-    opacity:0;
-    visibility:hidden;
-    background:var(--ivory);
-    border-radius:2px;
-    box-shadow:none;
-    z-index:1;
-    transition:height 0.7s ease 0.3s, bottom 0.7s ease 0.3s, opacity 0.3s ease 0.3s, visibility 0s linear 0.3s, box-shadow 0.3s ease 0.3s;
-    overflow:hidden;
-  }
-  .envelope.open .env-letter{
-    height:130%;
-    bottom:40%;
-    opacity:1;
-    visibility:visible;
-    box-shadow:0 10px 30px rgba(0,0,0,0.3);
-    transition:height 0.7s ease 0.3s, bottom 0.7s ease 0.3s, opacity 0.3s ease 0.3s, visibility 0s linear 0.3s, box-shadow 0.3s ease 0.3s;
-  }
-
-  .hint{
-    margin-top:28px;
+.hint{
+    width:680px;
+    margin:28px auto 0;
     text-align:center;
     font-size:0.95rem;
     letter-spacing:0.12em;
     text-transform:uppercase;
     color:var(--gold-soft);
-    opacity:0.85;
-    animation:pulse 2.4s ease-in-out infinite;
-  }
-  @keyframes pulse{
-    0%,100%{opacity:0.5;}
-    50%{opacity:1;}
-  }
-  .envelope-wrap.hide{
-    display:none;
-  }
+}
+
+/* ---------- TOP FLAP ---------- */
+.flap{
+    border-left:340px solid transparent;
+    border-right:340px solid transparent;
+    border-top:220px solid #1F4E79;
+    border-bottom:0 solid transparent;
+
+    transition:transform .6s ease, opacity .5s ease;
+    pointer-events:none;
+    z-index:3;
+    filter:drop-shadow(0 3px 4px rgba(0,0,0,.2));
+}
+
+.envelope.open .flap{
+    transform:translateY(-90px) scale(.92);
+    opacity:0;
+}
+
+/* ---------- POCKET ---------- */
+.pocket{
+    border-left:340px solid #dcb877;
+    border-right:340px solid #dcb877;
+    border-top:220px solid transparent;
+    border-bottom:220px solid #c9a15a;
+
+    border-bottom-left-radius:6px;
+    border-bottom-right-radius:6px;
+
+    pointer-events:none;
+    z-index:2;
+}
+
+/* ---------- WAX SEAL ---------- */
+.seal{
+    position:absolute;
+    top:215px;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:100px;
+    height:100px;
+
+    border-radius:0;
+    overflow:hidden;
+    background:transparent;
+    box-shadow:none;
+
+    z-index:4;
+    transition:opacity .4s ease, transform .4s ease;
+}
+
+.seal-img{
+    width:100%;
+    height:100%;
+    object-fit:contain; /* or cover */
+    display:block;
+}
+
+/* ---------- LETTER ---------- */
+.env-letter{
+    position:absolute;
+    left:6%;
+    right:6%;
+    bottom:6%;
+
+    height:0;
+    opacity:0;
+    visibility:hidden;
+
+    background:var(--ivory);
+    border-radius:4px;
+
+    overflow:hidden;
+    z-index:1;
+
+    transition:
+        height .7s ease .3s,
+        bottom .7s ease .3s,
+        opacity .3s ease .3s,
+        visibility 0s linear .3s,
+        box-shadow .3s ease .3s;
+}
+
+.envelope.open .env-letter{
+    height:130%;
+    bottom:40%;
+    opacity:1;
+    visibility:visible;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
 
   /* ---------- LETTER PAGE ---------- */
   .letter-page{
@@ -223,6 +237,42 @@
     to{opacity:1;transform:translateY(0);}
   }
   .letter-page.show{display:block;}
+
+
+.heart{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:fit-content;
+    margin:0 auto 15px;
+    font-size:90px;
+    color:var(--rose);
+    cursor:pointer;
+    user-select:none;
+    animation:heartbeat 1.5s infinite;
+    transition:.3s;
+}
+
+.heart:hover{
+    transform:scale(1.15);
+    color:#6e1f22;
+}
+
+@keyframes heartbeat{
+    0%,100%{
+        transform: scale(1);
+    }
+    25%{
+        transform: scale(1.2);
+    }
+    50%{
+        transform: scale(1.35);
+    }
+    75%{
+        transform: scale(1.2);
+    }
+}
+
 
   .eyebrow{
     text-align:center;
@@ -428,7 +478,7 @@
         <div class="front pocket"></div>
         <div class="front flap"></div>
         <div class="seal">
-          <img class="seal-img" src="YOUR-PHOTO-URL-HERE.jpg" alt=""
+          <img class="seal-img" src="Love_seal_KA.PNG" alt=""
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
           <div class="seal-placeholder">
             <span>your<br>photo</span>
@@ -444,31 +494,52 @@
 </div>
 
 <div class="letter-page" id="letterPage">
-  <button class="back-btn" id="toEnvelope" aria-label="Return to envelope" title="Return to envelope">♥</button>
-  <div class="eyebrow">a little something for</div>
-  <h1 class="title">[Partner's Name]</h1>
-  <div class="divider"></div>
 
-  <div class="body-text">
-    <p>My dearest <span class="placeholder">[Partner's Name]</span>,</p>
-    <p>Happy birthday to the person who makes every ordinary day feel like something worth remembering. <span class="placeholder">[This is where a favorite memory will go — a night, a trip, a small moment that still makes you smile.]</span></p>
-    <p><span class="placeholder">[This is where an inside joke, a habit you love, or something only the two of you would understand goes.]</span></p>
-    <p>I could try to list every reason I love you, but I'd run out of page before I ran out of reasons. So instead, here's just one: <span class="placeholder">[the thing you love most about them]</span>.</p>
-    <p>Here's to another year of us.</p>
-  </div>
+    <div class="heart"
+         id="toEnvelope"
+         role="button"
+         tabindex="0"
+         title="Return to envelope">
+        ♥
+    </div>
 
+    <div class="eyebrow">
+        A LITTLE SOMETHING FOR
+    </div>
+
+    <h1 class="title">
+        Azmahanis Binti Ahmad Loothpi
+    </h1>
+
+    <div class="divider"></div>
+
+    <div class="body-text">
+        <p>My dearest <span class="placeholder">Azmahanis,</span></p>
+
+        <p>
+            Selamat Ulang Tahun yang ke-21 kesayangan Khai, Azmahanis. 
+	Khai takda apa nak ucap sangat
+        </p>
+
+        <p>
+            Here's to another year of us.
+        </p>
+    
+
+    </div>
   <div class="photos">
     <div class="polaroid"><div class="frame">photo 1</div><span class="cap">[caption]</span></div>
     <div class="polaroid"><div class="frame">photo 2</div><span class="cap">[caption]</span></div>
     <div class="polaroid"><div class="frame">photo 3</div><span class="cap">[caption]</span></div>
   </div>
 
-  <div class="signoff">— [Your Name]</div>
+  <div class="signoff">— Khairul Afzan </div>
 
   <div class="more-wrap">
     <button class="more-btn" id="toGallery">our story so far →</button>
   </div>
 </div>
+
 
 <div class="gallery-page" id="galleryPage">
   <div class="eyebrow">every moment</div>
