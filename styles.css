@@ -234,7 +234,7 @@
 .letter-page{
     display:none;
     max-width:750px;
-    width:100vw;
+    width:100%;
     margin:60px auto 100px;
     background:var(--ivory);
     color:#2b1016;
@@ -243,6 +243,7 @@
     box-shadow:0 40px 90px rgba(0,0,0,0.5);
     position:relative;
     z-index:2;
+    overflow-x:hidden;
     animation:rise 1s ease both;
 }
 
@@ -474,7 +475,7 @@
 .gallery-page{
     display:none;
     max-width:950px;
-    width:95vw;
+    width:95%;
     margin:60px auto 100px;
     background:var(--ivory);
     color:#2b1016;
@@ -483,6 +484,7 @@
     box-shadow:0 40px 90px rgba(0,0,0,.5);
     position:relative;
     z-index:2;
+    overflow-x:hidden;
     animation:rise .8s ease both;
 }
 
