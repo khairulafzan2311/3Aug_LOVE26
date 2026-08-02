@@ -26,13 +26,37 @@
     touch-action:manipulation; /* stop double-tap-to-zoom on tap/scroll */
   }
 
-  /* full-page background photo — replace the src below with your own image */
-  .page-bg{position:fixed;inset:0;z-index:0;overflow:hidden;}
-  .page-bg-img{width:100%;height:100%;object-fit:cover;display:block;}
-  .page-bg-overlay{
-    position:fixed;inset:0;z-index:0;pointer-events:none;
-    background:linear-gradient(180deg, rgba(26,10,13,0.55) 0%, rgba(26,10,13,0.68) 55%, rgba(20,8,10,0.82) 100%);
-  }
+
+ /* ---------- HERO BACKGROUND ---------- */
+.page-bg,
+.page-bg picture{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    overflow:hidden;
+}
+
+.page-bg-img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.page-bg-overlay{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    background:linear-gradient(
+        180deg,
+        rgba(26,10,13,0.55) 0%,
+        rgba(26,10,13,0.68) 55%,
+        rgba(20,8,10,0.82) 100%
+    );
+}
 
   /* ambient floating particles */
   .petals{position:fixed;inset:0;pointer-events:none;z-index:1;}
