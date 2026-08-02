@@ -11,9 +11,19 @@
 <body>
 
 <div class="page-bg">
-  <img class="page-bg-img" src="AnisKhai/Side_by_side_blue1.png" alt=""
-       onerror="this.style.display='none';">
+    <picture>
+        <!-- Mobile -->
+        <source
+            media="(max-width: 768px)"
+            srcset="AnisKhai/Side_by_side_blue1.png">
+
+        <!-- Desktop -->
+        <img class="page-bg-img"
+             src="AnisKhai/Side_by_side_blue5.png"
+             alt="">
+    </picture>
 </div>
+
 <div class="page-bg-overlay"></div>
 
 <div class="petals" id="petals"></div>
