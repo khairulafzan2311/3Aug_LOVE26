@@ -16,6 +16,7 @@
   const envelopeWrap = document.getElementById('envelopeWrap');
   const letterPage = document.getElementById('letterPage');
   const stage = document.getElementById('stage');
+  const scrollWrapper = document.getElementById('scrollWrapper');
 
   envelopeWrap.addEventListener('click', () => {
     if(envelope.classList.contains('open')) return;
@@ -60,12 +61,12 @@
   document.getElementById('toGallery').addEventListener('click', () => {
     letterPageEl.classList.remove('show');
     galleryPage.classList.add('show');
-    window.scrollTo({top:0, behavior:'smooth'});
+    scrollWrapper.scrollTo({top:0, behavior:'smooth'});
   });
   document.getElementById('toLetter').addEventListener('click', () => {
     galleryPage.classList.remove('show');
     letterPageEl.classList.add('show');
-    window.scrollTo({top:0, behavior:'smooth'});
+    scrollWrapper.scrollTo({top:0, behavior:'smooth'});
   });
 
   document.getElementById('toEnvelope').addEventListener('click', () => {
@@ -74,7 +75,7 @@
     envelope.classList.remove('open');
     stage.classList.remove('hidden');
     requestAnimationFrame(() => { stage.classList.remove('fade-out'); });
-    window.scrollTo({top:0, behavior:'smooth'});
+    scrollWrapper.scrollTo({top:0, behavior:'smooth'});
   });
 
 
@@ -253,5 +254,3 @@ function changeGallery(gallery, direction) {
     document.getElementById("gallery" + gallery).src =
         galleries[gallery][currentIndex[gallery]];
 }
-
-
