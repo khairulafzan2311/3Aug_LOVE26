@@ -1,0 +1,606 @@
+  :root{
+    --wine:#2b1016;
+    --wine-deep:#1a0a0d;
+    --ivory:#f4e9dd;
+    --gold:#c9a15a;
+    --gold-soft:#e3c98f;
+    --rose:#c98f8a;
+    --line: rgba(244,233,221,0.18);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    min-height:100vh;
+    background:
+      radial-gradient(ellipse at 50% 0%, #3a1620 0%, var(--wine) 45%, var(--wine-deep) 100%);
+    font-family:'EB Garamond', serif;
+    color:var(--ivory);
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* full-page background photo — replace the src below with your own image */
+  .page-bg{position:fixed;inset:0;z-index:0;overflow:hidden;}
+  .page-bg-img{width:100%;height:100%;object-fit:cover;display:block;}
+  .page-bg-overlay{
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:linear-gradient(180deg, rgba(26,10,13,0.55) 0%, rgba(26,10,13,0.68) 55%, rgba(20,8,10,0.82) 100%);
+  }
+
+  /* ambient floating particles */
+  .petals{position:fixed;inset:0;pointer-events:none;z-index:1;}
+  .petal{
+    position:absolute;
+    top:-5%;
+    width:10px;height:10px;
+    background:var(--rose);
+    opacity:0.35;
+    border-radius:0 100% 0 100%;
+    animation:fall linear infinite;
+  }
+  @keyframes fall{
+    0%{transform:translateY(0) rotate(0deg);}
+    100%{transform:translateY(110vh) rotate(360deg);}
+  }
+
+  .stage{
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:2;
+    opacity:1;
+    transition:opacity 0.6s ease;
+  }
+  .stage.fade-out{opacity:0;}
+  .stage.hidden{display:none;}
+
+  /* ---------- ENVELOPE (680 × 440) ---------- */
+
+.envelope-wrap{
+    perspective:1600px;
+    cursor:pointer;
+    user-select:none;
+    transform:scale(var(--env-scale,1));
+    transform-origin:top center;
+}
+
+@media (max-width:768px){
+    .envelope-wrap{
+        --env-scale:0.75;
+    }
+}
+
+@media (max-width:480px){
+    .envelope-wrap{
+        --env-scale:0.52;
+    }
+}
+
+@media (max-width:360px){
+    .envelope-wrap{
+        --env-scale:0.42;
+    }
+}
+
+.envelope{
+    position:relative;
+    width:680px;
+    height:440px;
+    margin:0 auto;
+    border-bottom-left-radius:6px;
+    border-bottom-right-radius:6px;
+    background:#1F4E79;
+    box-shadow:0 20px 45px rgba(0,0,0,.4);
+    transition:transform .6s ease;
+}
+
+.envelope-wrap:hover .envelope{
+    transform:translateY(-4px);
+}
+
+.front{
+    position:absolute;
+    inset:0;
+    width:0;
+    height:0;
+}
+
+.hint{
+    width:680px;
+    margin:28px auto 0;
+    text-align:center;
+    font-size:0.95rem;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--gold-soft);
+}
+
+/* ---------- TOP FLAP ---------- */
+.flap{
+    border-left:340px solid transparent;
+    border-right:340px solid transparent;
+    border-top:220px solid #1F4E79;
+    border-bottom:0 solid transparent;
+
+    transition:transform .6s ease, opacity .5s ease;
+    pointer-events:none;
+    z-index:3;
+    filter:drop-shadow(0 3px 4px rgba(0,0,0,.2));
+}
+
+.envelope.open .flap{
+    transform:translateY(-90px) scale(.92);
+    opacity:0;
+}
+
+/* ---------- POCKET ---------- */
+.pocket{
+    border-left:340px solid #dcb877;
+    border-right:340px solid #dcb877;
+    border-top:220px solid transparent;
+    border-bottom:220px solid #c9a15a;
+
+    border-bottom-left-radius:6px;
+    border-bottom-right-radius:6px;
+
+    pointer-events:none;
+    z-index:2;
+}
+
+/* ---------- WAX SEAL ---------- */
+.seal{
+    position:absolute;
+    top:215px;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:200px;
+    height:200px;
+
+    border-radius:0;
+    overflow:hidden;
+    background:transparent;
+    box-shadow:none;
+
+    z-index:4;
+    transition:opacity .4s ease, transform .4s ease;
+}
+
+.seal-img{
+    width:100%;
+    height:100%;
+    object-fit:contain; /* or cover */
+    display:block;
+}
+
+/* ---------- LETTER ---------- */
+.env-letter{
+    position:absolute;
+    left:6%;
+    right:6%;
+    bottom:6%;
+
+    height:0;
+    opacity:0;
+    visibility:hidden;
+
+    background:var(--ivory);
+    border-radius:4px;
+
+    overflow:hidden;
+    z-index:1;
+
+    transition:
+        height .7s ease .3s,
+        bottom .7s ease .3s,
+        opacity .3s ease .3s,
+        visibility 0s linear .3s,
+        box-shadow .3s ease .3s;
+}
+
+.envelope.open .env-letter{
+    height:130%;
+    bottom:40%;
+    opacity:1;
+    visibility:visible;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+  /* ---------- LETTER PAGE ---------- */
+.letter-page{
+    display:none;
+    max-width:750px;
+    width:100vw;
+    margin:60px auto 100px;
+    background:var(--ivory);
+    color:#2b1016;
+    padding:min(8vw,60px) min(7vw,56px);
+    border-radius:3px;
+    box-shadow:0 40px 90px rgba(0,0,0,0.5);
+    position:relative;
+    z-index:2;
+    animation:rise 1s ease both;
+}
+
+@keyframes rise{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.letter-page.show{
+    display:block;
+}
+
+/* ---------- LETTER TEXT ---------- */
+.letter div{
+    margin:2px 0;
+    line-height:1.5;
+}
+
+.heart{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:fit-content;
+    margin:0 auto 15px;
+    font-size:90px;
+    color:var(--rose);
+    cursor:pointer;
+    user-select:none;
+    animation:heartbeat 1.5s infinite;
+    transition:.3s;
+}
+
+.heart:hover{
+    transform:scale(1.15);
+    color:#6e1f22;
+}
+
+@keyframes heartbeat{
+    0%,100%{
+        transform: scale(1);
+    }
+    25%{
+        transform: scale(1.2);
+    }
+    50%{
+        transform: scale(1.35);
+    }
+    75%{
+        transform: scale(1.2);
+    }
+}
+
+
+  .eyebrow{
+    text-align:center;
+    font-family:'EB Garamond',serif;
+    font-style:italic;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    font-size:0.78rem;
+    color:var(--rose);
+    margin-bottom:6px;
+  }
+  h1.title{
+    font-family:'Parisienne',cursive;
+    font-weight:400;
+    text-align:center;
+    font-size:clamp(2.4rem,7vw,3.4rem);
+    color:#6e1f22;
+    margin:0 0 28px;
+  }
+  .divider{
+    width:80px;height:1px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+    margin:0 auto 32px;
+  }
+  .body-text{
+    font-size:1.18rem;
+    line-height:1.85;
+    font-family:'Cormorant Garamond',serif;
+    text-align: justify;
+    text-justify: inter-word; /* Improves spacing in some browsers */
+  }
+  .body-text p{margin:0 0 22px;}
+  .body-text .placeholder{
+    background:rgba(201,161,90,0.18);
+    border-radius:3px;
+    padding:0 4px;
+  }
+  .signoff{
+    margin-top:36px;
+    text-align:right;
+    font-family:'Parisienne',cursive;
+    font-size:1.8rem;
+    color:#6e1f22;
+  }
+
+/* ---------- PHOTO STRIP ---------- */
+
+.photos{
+    display:flex;
+    gap:18px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin:36px 0 8px;
+}
+
+.polaroid{
+    background:#d2b48c;
+    padding:10px 10px 20px;
+    box-shadow:0 12px 24px rgba(0,0,0,.25);
+    width:200px;
+    height:240px;
+    transform:rotate(var(--r,-3deg));
+    transition:transform .3s ease;
+}
+
+.polaroid:nth-child(2){
+    --r:2deg;
+}
+
+.polaroid:nth-child(3){
+    --r:-1.5deg;
+}
+
+.polaroid:hover{
+    transform:rotate(0deg) scale(1.05);
+}
+
+.polaroid .frame{
+    position:relative;
+    width:100%;
+    aspect-ratio:1/1;
+    overflow:hidden;
+}
+
+/* Both images */
+.polaroid .frame .photo{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:opacity .4s ease;
+}
+
+/* Show first image */
+.polaroid .frame .front{
+    opacity:1;
+}
+
+/* Hide second image */
+.polaroid .frame .back{
+    opacity:0;
+}
+
+/* Swap images on hover */
+.polaroid:hover .frame .front{
+    opacity:0;
+}
+
+.polaroid:hover .frame .back{
+    opacity:1;
+}
+
+.polaroid .cap{
+    display:block;
+    text-align:center;
+    font-family:'EB Garamond',serif;
+    font-style:italic;
+    font-size:1rem;
+    color:#6e1f22;
+    margin-top:10px;
+}
+
+  .back-btn{
+    display:block;
+    width:fit-content;
+    position:static;
+    margin:0 auto 8px;
+    font-size:1.4rem;
+    line-height:1;
+    background:none;
+    border:none;
+    color:var(--rose);
+    opacity:0.75;
+    cursor:pointer;
+    padding:8px;
+    z-index:10;
+    pointer-events:auto;
+    transition:opacity 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  }
+  .back-btn:hover{
+    opacity:1;
+    color:#6e1f22;
+    transform:scale(1.15);
+  }
+
+  .more-wrap{
+    text-align:center;
+    margin-top:38px;
+  }
+  .more-btn{
+    font-family:'EB Garamond',serif;
+    font-style:italic;
+    font-size:1rem;
+    letter-spacing:0.04em;
+    background:none;
+    border:1px solid rgba(110,31,34,0.4);
+    color:#6e1f22;
+    padding:10px 26px;
+    border-radius:30px;
+    cursor:pointer;
+    transition:background 0.3s ease, color 0.3s ease;
+  }
+  .more-btn:hover{
+    background:#6e1f22;
+    color:var(--ivory);
+  }
+
+  /* ---------- GALLERY PAGE ---------- */
+.gallery-page{
+    display:none;
+    max-width:950px;
+    width:95vw;
+    margin:60px auto 100px;
+    background:var(--ivory);
+    color:#2b1016;
+    padding:min(6vw,60px);
+    border-radius:3px;
+    box-shadow:0 40px 90px rgba(0,0,0,.5);
+    position:relative;
+    z-index:2;
+    animation:rise .8s ease both;
+}
+
+.gallery-page.show{
+    display:block;
+}
+
+.gallery-title{
+    font-size:clamp(2.2rem,6vw,3rem);
+}
+
+/* ---------- GALLERY GRID ---------- */
+
+.gallery-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+    margin-top:30px;
+}
+
+/* ---------- CARD ---------- */
+
+.g-item{
+    background:#d2b48c;
+    padding:12px 12px 18px;
+    box-shadow:0 12px 24px rgba(0,0,0,.25);
+    text-align:center;
+    transition:.3s;
+    display:flex;
+    flex-direction:column;
+}
+
+.g-item:hover{
+    transform:translateY(-5px);
+}
+
+/* ---------- PHOTO ---------- */
+
+.g-frame{
+    position:relative;
+    width:100%;
+    height:280px;          /* BIGGER IMAGE */
+    overflow:hidden;
+    background:#fff;
+    margin-bottom:12px;
+}
+
+.g-frame img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+/* ---------- FOOTER ---------- */
+
+.g-footer{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+/* ---------- CAPTION ---------- */
+
+.g-text{
+    flex:1;
+    margin:0;
+    text-align:center;
+    font-family:'EB Garamond',serif;
+    font-style:italic;
+    font-size:1.05rem;
+    color:#6e1f22;
+}
+
+.g-text .placeholder{
+    background:none;
+    padding:0;
+}
+
+/* ---------- BUTTON ---------- */
+
+.g-nav{
+    width:38px;
+    height:38px;
+    border:none;
+    border-radius:50%;
+    background:#6e1f22;
+    color:#fff;
+    font-size:18px;
+    cursor:pointer;
+    transition:.3s;
+    flex-shrink:0;
+}
+
+.g-nav:hover{
+    background:#8b3a3d;
+    transform:scale(1.1);
+}
+
+
+  .footer-note{
+    text-align:center;
+    font-size:0.8rem;
+    color:rgba(244,233,221,0.4);
+    padding-bottom:30px;
+    font-family:'EB Garamond',serif;
+    letter-spacing:0.05em;
+    position:relative;
+    z-index:2;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .petal, .hint{animation:none;}
+    .envelope, .flap, .env-letter, .seal{transition:none;}
+  }
+
+  /* ---------- MUSIC TOGGLE ---------- */
+  .music-toggle{
+    position:fixed;
+    top:18px;
+    right:18px;
+    z-index:50;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:rgba(26,10,13,0.55);
+    color:var(--gold-soft);
+    font-size:1.15rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    backdrop-filter:blur(4px);
+    transition:transform .25s ease, background .25s ease;
+  }
+  .music-toggle:hover{
+    transform:scale(1.08);
+    background:rgba(26,10,13,0.8);
+  }
+  .music-toggle.playing{ animation:spin 6s linear infinite; }
+  @keyframes spin{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }

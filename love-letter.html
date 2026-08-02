@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Parisienne&family=EB+Garamond:ital@0;1&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="page-bg">
+  <img class="page-bg-img" src="AnisKhai/Side_by_side_blue5.PNG" alt=""
+       onerror="this.style.display='none';">
+</div>
+<div class="page-bg-overlay"></div>
+
+<div class="petals" id="petals"></div>
+
+<!-- background song -->
+<audio id="bgMusic" src="AnisKhai/bgM_Until_I_Found_You_Cover_Violin.mp3" loop preload="auto"></audio>
+<button class="music-toggle" id="musicToggle" aria-label="Toggle music" title="Toggle music">♪</button>
+
+<div class="stage" id="stage">
+  <div>
+    <div class="envelope-wrap" id="envelopeWrap">
+      <div class="envelope" id="envelope">
+        <div class="env-letter"></div>
+        <div class="front pocket"></div>
+        <div class="front flap"></div>
+        <div class="seal">
+          <img class="seal-img" src="AnisKhai/Love_seal_KA.PNG" alt=""
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+          <div class="seal-placeholder">
+            <span>your<br>photo</span>
+          </div>
+        </div>
+
+
+
+      </div>
+      <div class="hint">tap to open</div>
+    </div>
+  </div>
+</div>
+
+<div class="letter-page" id="letterPage">
+
+    <div class="heart"
+         id="toEnvelope"
+         role="button"
+         tabindex="0"
+         title="Return to envelope">
+        ♥
+    </div>
+
+    <div class="eyebrow">
+        A LETTER FOR MY ONLY PRETTY PRINCESS
+    </div>
+
+    <h1 class="title">
+        <div>Azmahanis </div> 
+	<div>Binti Ahmad Loothpi </div>
+    </h1> 
+   
+
+
+    <div class="divider"></div>
+
+    <div class="body-text">
+        <p>My dearest <span class="placeholder">Azmahanis,</span></p>
+
+        
+       <div class="letter">
+   	<div> Selamat Ulang Tahun Sayangku. 🥰 </div>
+    	<div>Sannah Helwah. Barakallah fii Umrik, Sayangku Azmahanis. ❤️✨ </div>
+	<div>Semoga dipanjangkan umur, dimurahkan rezeki, dan dipermudahkan segala urusan untu mencapai apa yang diimpikan. 😇❤️
+	     Semoga terus menjadi insan yang baik, anak yang baik dan solehah untuk ibu abah, kakak yang baik. 🥰❤️ 
+	</div>
+
+
+	<P>
+	<div>Khai tahu Anis memang orang baik. Tapi kadang keadaan mencemburui kita yang memaksa untuk sedikit tegas dalam membuat sesuatu. Khai harap Anis terus sabar walau apa pun ya. 🥰🤗
+	     Khai pun harap.. semoga Anis menjadi pasangan terbaik untuk Khai.. yang solehah untuk Khai.. yang solehot untuk Khai.. Khai sayanggggg Anis sangat sangat.. heheh muahhhhh 😘😘😘😘😘
+	</div>
+	</p>
+
+
+	<p>
+	<div>Sayang, walaupun hubungan kita baru je setahun kan. Tapi nii tahun kedua kita sambut hari jadi Anis macam nii. 😊❤️
+	     Tapi tkpa laa.. dah memang lumrah keadaan kita macam nii kan. Khai akan terus sabar untuk tahun berikutnya. Khai harap satu hari nanti kita boleh sambut hari penting Anis pada hari yang sama. 🥺❤️
+	</div>
+	</p>
+
+
+	<p>
+	<div>Kita memilih diri kita antara satu sama lain. Kita pilih cara hidup kita dalam hubungan nii. 😇❤️
+	     Semoga apa yang berlaku dalam hubungan kita nii berkekalan sampai bila pun ya 🥰❤️
+	     Semoga sentiasa terus rasa teruja.. dalam perhubungan kita. Walau apa pun keadaan kita jaga sama-sama dan kita ja yang tahu apa yang kita buat apa yang jadi. Muahhhhh 😘❤️
+	     Khai janji ya akan terus jaga hubungan kita dengan baik walau apa pun yang jadi ye sayangku. 🥺❤️ 
+	</div>
+	</p>
+
+
+	<p>
+	<div>Khai tak tahu dah nak tulis apa.. jujur cakap ada yang Khai recycle ayat tahun lepas 🤭❤️
+	     Tapi apa pun.. Khai nak cakap terima kasih sangat dekat Anis. Anis layan Khai macam raja. 🤴❤️
+	     Khai pun tak tahu kenapa.. terima kasih sangat bersyukur sangat Khai rasa.. Khai akan cuba sehabis baik untuk meratukan kamu, Azmahanis, puteri hati Khai sampai bila pun. 👸❤️
+  	     Terima kasih sebab bagi ruang untuk kita sama-sama terus kuatkan hubungan ini dengan cara macam tuu.. Khai janji Khai akan jaga Anis sejak awal sejak kali pertama Khai ambil hak Anis🥺❤️
+	     Semoga kita terus jaga semua nii sama-sama ya.. Khai bukan lelaki yang kuat bukan lelaki yang hebat. Tetapi dengan kepercayaan Anis.. Insyaallah Khai mampu terus kuat. 🤗❤️
+	     Terima kasih Sayangku, Azmahanis.. jangan lupa selalu belanja nakal nakal dengan Khai ya.. heheh 🤭❤️.. Muahhhhh 😘😘😘😘😘
+	</div>
+	</p>
+
+
+	<p>
+	<div>Terima kasih.. selalu sabar dengan karenah Khai yang penuh dengan naik turun.. kadang macam budak 👦🏻❤️.. kadang macam ketua 👨🏻❤️..
+	     Khai tkda kuasa untuk ubah cara Anis 🤗❤️.. apa yang Khai boleh buat tegur, tegur lagi, dan terus tegur.. sebab Khai sayanggggg sangat Anis. 😊❤️
+	     Terima kasih jugak sebab percaya.. setiap tingkah laku Khai.. setiap keputusan yang Khai buat.. untuk kebaikan hubungan kita. 😇❤️
+	     Orang cakap.. dalam hubungan mesti kena ada senda gurau.. ada marah.. ada gaduh.. itu yang kita cuba buat dan memang selalu macam tu pun🥺❤️
+             Khai harap Anis tak bosan la dengan cara Khai yang macam tuu.. dan terus sabar dalam perhubungan kita 😊❤️
+             Khai sayanggggg Anis sangat sangat 😘❤️
+	</div>
+	</p>
+
+
+	<p>
+             <center>TERIMA KASIH AZMAHANIS KERANA MEMILIH KHAIRUL AFZAN SEBAGAI PEMENANG DI HATI UNTUK BERSAMA SELAMANYA, INSYALLAH 😇❤️</center>
+	</p>
+</div>
+
+        
+
+        <p>
+            Here's to another year of us. 😘❤️
+        </p>
+    </div>
+
+ <div class="photos">
+
+  <!-- Photo 1 -->
+  <div class="polaroid">
+    <div class="frame">
+      <img class="photo front" src="AnisKhai/Polaroid1_OFD1.PNG" alt="Our First Date">
+      <img class="photo back" src="AnisKhai/Polaroid1_OFD2.PNG" alt="Our First Date 2">
+    </div>
+    <span class="cap">Our First Date ❤️</span>
+  </div>
+
+  <!-- Photo 2 -->
+  <div class="polaroid">
+    <div class="frame">
+      <img class="photo front" src="AnisKhai/Polaroid2_FM1.PNG" alt="Favorite Memory">
+      <img class="photo back" src="AnisKhai/Polaroid2_FM2.PNG" alt="Favorite Memory 2">
+    </div>
+    <span class="cap">Favorite Memory 🥰</span>
+  </div>
+
+  <!-- Photo 3 -->
+  <div class="polaroid">
+    <div class="frame">
+      <img class="photo front" src="AnisKhai/Polaroid3_AF1.PNG" alt="Forever & Always">
+      <img class="photo back" src="AnisKhai/Polaroid3_AF2.PNG" alt="Forever & Always 2">
+    </div>
+    <span class="cap"> Always Forever 😇</span>
+  </div>
+
+  <!-- Photo 4 -->
+  <div class="polaroid">
+    <div class="frame">
+      <img class="photo front" src="AnisKhai/Promise1.PNG" alt="Forever & Always">
+      <img class="photo back" src="AnisKhai/KAkiss1.PNG" alt="Forever & Always 2">
+    </div>
+    <span class="cap"> Our Promise 👩‍❤️‍👨💋 </span>
+  </div>
+
+ <!-- Photo 5 -->
+  <div class="polaroid">
+    <div class="frame">
+      <img class="photo front" src="AnisKhai/Promise2.PNG" alt="Forever & Always">
+      <img class="photo back" src="AnisKhai/KAkiss2.PNG" alt="Forever & Always 2">
+    </div>
+    <span class="cap"> Our Promise 👩‍❤️‍👨💋 </span>
+  </div>
+
+</div>
+
+
+  <div class="signoff"> — Khairul Afzan </div>
+
+  <div class="more-wrap">
+    <button class="more-btn" id="toGallery">our story so far →</button>
+  </div>
+</div>
+
+
+
+<div class="gallery-page" id="galleryPage">
+  <div class="eyebrow"> a little moment we spend together </div>
+  <h1 class="title gallery-title">Our Tiny Gallery</h1>
+  <div class="divider"></div>
+
+  <div class="gallery-grid">
+
+<!-- Gallery 1 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery0" src="AnisKhai/G1_1.PNG" alt="Gallery 1">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(0,-1)">❮</button>
+        <p class="g-text"> Our first date ❤️ </p>
+        <button class="g-nav" onclick="changeGallery(0,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 2 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery1" src="AnisKhai/G2_1.PNG" alt="Gallery 2">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(1,-1)">❮</button>
+        <p class="g-text"> Favorite person 👩‍❤️‍👨 </p>
+        <button class="g-nav" onclick="changeGallery(1,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 3 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery2" src="AnisKhai/G3_1.PNG" alt="Gallery 3">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(2,-1)">❮</button>
+        <p class="g-text"> Favorite memory 🥰 </p>
+        <button class="g-nav" onclick="changeGallery(2,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 4 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery3" src="AnisKhai/G4_1.PNG" alt="Gallery 4">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(3,-1)">❮</button>
+        <p class="g-text"> Our adventures 🌍 </p>
+        <button class="g-nav" onclick="changeGallery(3,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 5 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery4" src="AnisKhai/G5_1.PNG" alt="Gallery 5">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(4,-1)">❮</button>
+        <p class="g-text"> Sweet memories 💖 </p>
+        <button class="g-nav" onclick="changeGallery(4,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 6 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery5" src="AnisKhai/G6_1.PNG" alt="Gallery 6">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(5,-1)">❮</button>
+        <p class="g-text"> With you always 🤗 </p>
+        <button class="g-nav" onclick="changeGallery(5,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 7 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery6" src="AnisKhai/G7_1.PNG" alt="Gallery 7">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(6,-1)">❮</button>
+        <p class="g-text"> Still choosing you 😊 </p>
+        <button class="g-nav" onclick="changeGallery(6,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 8 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery7" src="AnisKhai/G8_1.PNG" alt="Gallery 8">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(7,-1)">❮</button>
+        <p class="g-text"> Special moments 💕 </p>
+        <button class="g-nav" onclick="changeGallery(7,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 9 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery8" src="AnisKhai/G9_1.PNG" alt="Gallery 9">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(8,-1)">❮</button>
+        <p class="g-text"> Forever together 😇 </p>
+        <button class="g-nav" onclick="changeGallery(8,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 10 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery9" src="AnisKhai/G10_1.PNG" alt="Gallery 9">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(9,-1)">❮</button>
+        <p class="g-text"> Lucky to have you 😇 </p>
+        <button class="g-nav" onclick="changeGallery(9,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 11 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery10" src="AnisKhai/G11_1.PNG" alt="Gallery 11">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(10,-1)">❮</button>
+        <p class="g-text"> Love lives here 💗 </p>
+        <button class="g-nav" onclick="changeGallery(10,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 12 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery11" src="AnisKhai/G12_1.PNG" alt="Gallery 12">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(11,-1)">❮</button>
+        <p class="g-text"> Loves starts here ☺️ </p>
+        <button class="g-nav" onclick="changeGallery(11,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 13 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery12" src="AnisKhai/G13_1.PNG" alt="Gallery 13">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(12,-1)">❮</button>
+        <p class="g-text"> Better together 😍 </p>
+        <button class="g-nav" onclick="changeGallery(12,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 14 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery13" src="AnisKhai/G14_1.PNG" alt="Gallery 14">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(13,-1)">❮</button>
+        <p class="g-text"> Feel like home 🥰 </p>
+        <button class="g-nav" onclick="changeGallery(13,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 15 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery14" src="AnisKhai/G15_1.PNG" alt="Gallery 15">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(14,-1)">❮</button>
+        <p class="g-text"> Loves, enough 😘 </p>
+        <button class="g-nav" onclick="changeGallery(14,1)">❯</button>
+    </div>
+</div>
+
+
+</div>
+
+  <div class="more-wrap">
+    <button class="more-btn" id="toLetter">← back to the letter</button>
+  </div>
+</div>
+
+<div class="footer-note">made with love, just for you</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
