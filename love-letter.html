@@ -164,8 +164,8 @@
     top:215px;
     left:50%;
     transform:translate(-50%,-50%);
-    width:100px;
-    height:100px;
+    width:200px;
+    height:200px;
 
     border-radius:0;
     overflow:hidden;
@@ -218,10 +218,10 @@
 }
 
   /* ---------- LETTER PAGE ---------- */
-  .letter-page{
+.letter-page{
     display:none;
-    max-width:640px;
-    width:92vw;
+    max-width:750px;
+    width:100vw;
     margin:60px auto 100px;
     background:var(--ivory);
     color:#2b1016;
@@ -231,13 +231,28 @@
     position:relative;
     z-index:2;
     animation:rise 1s ease both;
-  }
-  @keyframes rise{
-    from{opacity:0;transform:translateY(40px);}
-    to{opacity:1;transform:translateY(0);}
-  }
-  .letter-page.show{display:block;}
+}
 
+@keyframes rise{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.letter-page.show{
+    display:block;
+}
+
+/* ---------- LETTER TEXT ---------- */
+.letter div{
+    margin:2px 0;
+    line-height:1.5;
+}
 
 .heart{
     display:flex;
@@ -301,6 +316,8 @@
     font-size:1.18rem;
     line-height:1.85;
     font-family:'Cormorant Garamond',serif;
+    text-align: justify;
+    text-justify: inter-word; /* Improves spacing in some browsers */
   }
   .body-text p{margin:0 0 22px;}
   .body-text .placeholder{
@@ -316,46 +333,84 @@
     color:#6e1f22;
   }
 
-  /* photo strip */
-  .photos{
+/* ---------- PHOTO STRIP ---------- */
+
+.photos{
     display:flex;
     gap:18px;
     justify-content:center;
     flex-wrap:wrap;
     margin:36px 0 8px;
-  }
-  .polaroid{
-    background:#fff;
-    padding:10px 10px 26px;
-    box-shadow:0 12px 24px rgba(0,0,0,0.25);
+}
+
+.polaroid{
+    background:#d2b48c;
+    padding:10px 10px 20px;
+    box-shadow:0 12px 24px rgba(0,0,0,.25);
+    width:200px;
+    height:240px;
     transform:rotate(var(--r,-3deg));
-    width:132px;
-    transition:transform 0.3s ease;
-  }
-  .polaroid:nth-child(2){--r:2deg;}
-  .polaroid:nth-child(3){--r:-1.5deg;}
-  .polaroid:hover{transform:rotate(0deg) scale(1.05);}
-  .polaroid .frame{
+    transition:transform .3s ease;
+}
+
+.polaroid:nth-child(2){
+    --r:2deg;
+}
+
+.polaroid:nth-child(3){
+    --r:-1.5deg;
+}
+
+.polaroid:hover{
+    transform:rotate(0deg) scale(1.05);
+}
+
+.polaroid .frame{
+    position:relative;
     width:100%;
     aspect-ratio:1/1;
-    background:repeating-linear-gradient(45deg,#e7dccb,#e7dccb 8px,#ddd0ba 8px,#ddd0ba 16px);
-    display:flex;align-items:center;justify-content:center;
-    font-family:'EB Garamond',serif;
-    font-style:italic;
-    font-size:0.72rem;
-    color:#8a7a63;
-    text-align:center;
-    padding:6px;
-  }
-  .polaroid .cap{
+    overflow:hidden;
+}
+
+/* Both images */
+.polaroid .frame .photo{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    transition:opacity .4s ease;
+}
+
+/* Show first image */
+.polaroid .frame .front{
+    opacity:1;
+}
+
+/* Hide second image */
+.polaroid .frame .back{
+    opacity:0;
+}
+
+/* Swap images on hover */
+.polaroid:hover .frame .front{
+    opacity:0;
+}
+
+.polaroid:hover .frame .back{
+    opacity:1;
+}
+
+.polaroid .cap{
     display:block;
     text-align:center;
     font-family:'EB Garamond',serif;
     font-style:italic;
-    font-size:0.78rem;
+    font-size:1rem;
     color:#6e1f22;
-    margin-top:8px;
-  }
+    margin-top:10px;
+}
 
   .back-btn{
     display:block;
@@ -403,45 +458,118 @@
   }
 
   /* ---------- GALLERY PAGE ---------- */
-  .gallery-page{
+.gallery-page{
     display:none;
-    max-width:820px;
-    width:92vw;
+    max-width:950px;
+    width:95vw;
     margin:60px auto 100px;
     background:var(--ivory);
     color:#2b1016;
-    padding:min(8vw,60px) min(6vw,56px);
+    padding:min(6vw,60px);
     border-radius:3px;
-    box-shadow:0 40px 90px rgba(0,0,0,0.5);
+    box-shadow:0 40px 90px rgba(0,0,0,.5);
     position:relative;
     z-index:2;
-    animation:rise 0.8s ease both;
-  }
-  .gallery-page.show{display:block;}
-  .gallery-title{font-size:clamp(2.2rem,6vw,3rem);}
-  .gallery-grid{
+    animation:rise .8s ease both;
+}
+
+.gallery-page.show{
+    display:block;
+}
+
+.gallery-title{
+    font-size:clamp(2.2rem,6vw,3rem);
+}
+
+/* ---------- GALLERY GRID ---------- */
+
+.gallery-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
-    gap:28px;
-    margin-top:20px;
-  }
-  .g-item{text-align:center;}
-  .g-frame{
-    aspect-ratio:1/1;
-    background:repeating-linear-gradient(45deg,#e7dccb,#e7dccb 8px,#ddd0ba 8px,#ddd0ba 16px);
-    display:flex;align-items:center;justify-content:center;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+    margin-top:30px;
+}
+
+/* ---------- CARD ---------- */
+
+.g-item{
+    background:#d2b48c;
+    padding:12px 12px 18px;
+    box-shadow:0 12px 24px rgba(0,0,0,.25);
+    text-align:center;
+    transition:.3s;
+    display:flex;
+    flex-direction:column;
+}
+
+.g-item:hover{
+    transform:translateY(-5px);
+}
+
+/* ---------- PHOTO ---------- */
+
+.g-frame{
+    position:relative;
+    width:100%;
+    height:280px;          /* BIGGER IMAGE */
+    overflow:hidden;
+    background:#fff;
+    margin-bottom:12px;
+}
+
+.g-frame img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+/* ---------- FOOTER ---------- */
+
+.g-footer{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+/* ---------- CAPTION ---------- */
+
+.g-text{
+    flex:1;
+    margin:0;
+    text-align:center;
     font-family:'EB Garamond',serif;
     font-style:italic;
-    color:#8a7a63;
-    border-radius:2px;
-    box-shadow:0 10px 20px rgba(0,0,0,0.15);
-  }
-  .g-text{
-    font-family:'Cormorant Garamond',serif;
-    font-size:1rem;
-    margin-top:12px;
-    line-height:1.5;
-  }
+    font-size:1.05rem;
+    color:#6e1f22;
+}
+
+.g-text .placeholder{
+    background:none;
+    padding:0;
+}
+
+/* ---------- BUTTON ---------- */
+
+.g-nav{
+    width:38px;
+    height:38px;
+    border:none;
+    border-radius:50%;
+    background:#6e1f22;
+    color:#fff;
+    font-size:18px;
+    cursor:pointer;
+    transition:.3s;
+    flex-shrink:0;
+}
+
+.g-nav:hover{
+    background:#8b3a3d;
+    transform:scale(1.1);
+}
+
 
   .footer-note{
     text-align:center;
@@ -458,17 +586,48 @@
     .petal, .hint{animation:none;}
     .envelope, .flap, .env-letter, .seal{transition:none;}
   }
+
+  /* ---------- MUSIC TOGGLE ---------- */
+  .music-toggle{
+    position:fixed;
+    top:18px;
+    right:18px;
+    z-index:50;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    border:1px solid var(--line);
+    background:rgba(26,10,13,0.55);
+    color:var(--gold-soft);
+    font-size:1.15rem;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    backdrop-filter:blur(4px);
+    transition:transform .25s ease, background .25s ease;
+  }
+  .music-toggle:hover{
+    transform:scale(1.08);
+    background:rgba(26,10,13,0.8);
+  }
+  .music-toggle.playing{ animation:spin 6s linear infinite; }
+  @keyframes spin{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
 </style>
 </head>
 <body>
 
 <div class="page-bg">
-  <img class="page-bg-img" src="Side_by_side2.PNG" alt=""
+  <img class="page-bg-img" src="Side_by_side_blue5.PNG" alt=""
        onerror="this.style.display='none';">
 </div>
 <div class="page-bg-overlay"></div>
 
 <div class="petals" id="petals"></div>
+
+<!-- background song -->
+<audio id="bgMusic" src="bgM_Until_I_Found_You_Cover_Violin.mp3" loop preload="auto"></audio>
+<button class="music-toggle" id="musicToggle" aria-label="Toggle music" title="Toggle music">♪</button>
 
 <div class="stage" id="stage">
   <div>
@@ -504,36 +663,138 @@
     </div>
 
     <div class="eyebrow">
-        A LITTLE SOMETHING FOR
+        A LETTER FOR MY ONLY PRETTY PRINCESS
     </div>
 
     <h1 class="title">
-        Azmahanis Binti Ahmad Loothpi
-    </h1>
+        <div>Azmahanis </div> 
+	<div>Binti Ahmad Loothpi </div>
+    </h1> 
+   
+
 
     <div class="divider"></div>
 
     <div class="body-text">
         <p>My dearest <span class="placeholder">Azmahanis,</span></p>
 
-        <p>
-            Selamat Ulang Tahun yang ke-21 kesayangan Khai, Azmahanis. 
-	Khai takda apa nak ucap sangat
-        </p>
+        
+       <div class="letter">
+   	<div> Selamat Ulang Tahun Sayangku. 🥰 </div>
+    	<div>Sannah Helwah. Barakallah fii Umrik, Sayangku Azmahanis. ❤️✨ </div>
+	<div>Semoga dipanjangkan umur, dimurahkan rezeki, dan dipermudahkan segala urusan untu mencapai apa yang diimpikan. 😇❤️
+	     Semoga terus menjadi insan yang baik, anak yang baik dan solehah untuk ibu abah, kakak yang baik. 🥰❤️ 
+	</div>
+
+
+	<P>
+	<div>Khai tahu Anis memang orang baik. Tapi kadang keadaan mencemburui kita yang memaksa untuk sedikit tegas dalam membuat sesuatu. Khai harap Anis terus sabar walau apa pun ya. 🥰🤗
+	     Khai pun harap.. semoga Anis menjadi pasangan terbaik untuk Khai.. yang solehah untuk Khai.. yang solehot untuk Khai.. Khai sayanggggg Anis sangat sangat.. heheh muahhhhh 😘😘😘😘😘
+	</div>
+	</p>
+
+
+	<p>
+	<div>Sayang, walaupun hubungan kita baru je setahun kan. Tapi nii tahun kedua kita sambut hari jadi Anis macam nii. 😊❤️
+	     Tapi tkpa laa.. dah memang lumrah keadaan kita macam nii kan. Khai akan terus sabar untuk tahun berikutnya. Khai harap satu hari nanti kita boleh sambut hari penting Anis pada hari yang sama. 🥺❤️
+	</div>
+	</p>
+
+
+	<p>
+	<div>Kita memilih diri kita antara satu sama lain. Kita pilih cara hidup kita dalam hubungan nii. 😇❤️
+	     Semoga apa yang berlaku dalam hubungan kita nii berkekalan sampai bila pun ya 🥰❤️
+	     Semoga sentiasa terus rasa teruja.. dalam perhubungan kita. Walau apa pun keadaan kita jaga sama-sama dan kita ja yang tahu apa yang kita buat apa yang jadi. Muahhhhh 😘❤️
+	     Khai janji ya akan terus jaga hubungan kita dengan baik walau apa pun yang jadi ye sayangku. 🥺❤️ 
+	</div>
+	</p>
+
+
+	<p>
+	<div>Khai tak tahu dah nak tulis apa.. jujur cakap ada yang Khai recycle ayat tahun lepas 🤭❤️
+	     Tapi apa pun.. Khai nak cakap terima kasih sangat dekat Anis. Anis layan Khai macam raja. 🤴❤️
+	     Khai pun tak tahu kenapa.. terima kasih sangat bersyukur sangat Khai rasa.. Khai akan cuba sehabis baik untuk meratukan kamu, Azmahanis, puteri hati Khai sampai bila pun. 👸❤️
+  	     Terima kasih sebab bagi ruang untuk kita sama-sama terus kuatkan hubungan ini dengan cara macam tuu.. Khai janji Khai akan jaga Anis sejak awal sejak kali pertama Khai ambil hak Anis🥺❤️
+	     Semoga kita terus jaga semua nii sama-sama ya.. Khai bukan lelaki yang kuat bukan lelaki yang hebat. Tetapi dengan kepercayaan Anis.. Insyaallah Khai mampu terus kuat. 🤗❤️
+	     Terima kasih Sayangku, Azmahanis.. jangan lupa selalu belanja nakal nakal dengan Khai ya.. heheh 🤭❤️.. Muahhhhh 😘😘😘😘😘
+	</div>
+	</p>
+
+
+	<p>
+	<div>Terima kasih.. selalu sabar dengan karenah Khai yang penuh dengan naik turun.. kadang macam budak 👦🏻❤️.. kadang macam ketua 👨🏻❤️..
+	     Khai tkda kuasa untuk ubah cara Anis 🤗❤️.. apa yang Khai boleh buat tegur, tegur lagi, dan terus tegur.. sebab Khai sayanggggg sangat Anis. 😊❤️
+	     Terima kasih jugak sebab percaya.. setiap tingkah laku Khai.. setiap keputusan yang Khai buat.. untuk kebaikan hubungan kita. 😇❤️
+	     Orang cakap.. dalam hubungan mesti kena ada senda gurau.. ada marah.. ada gaduh.. itu yang kita cuba buat dan memang selalu macam tu pun🥺❤️
+             Khai harap Anis tak bosan la dengan cara Khai yang macam tuu.. dan terus sabar dalam perhubungan kita 😊❤️
+             Khai sayanggggg Anis sangat sangat 😘❤️
+	</div>
+	</p>
+
+
+	<p>
+             <center>TERIMA KASIH AZMAHANIS KERANA MEMILIH KHAIRUL AFZAN SEBAGAI PEMENANG DI HATI UNTUK BERSAMA SELAMANYA, INSYALLAH 😇❤️</center>
+	</p>
+</div>
+
+        
 
         <p>
-            Here's to another year of us.
+            Here's to another year of us. 😘❤️
         </p>
-    
-
     </div>
-  <div class="photos">
-    <div class="polaroid"><div class="frame">photo 1</div><span class="cap">[caption]</span></div>
-    <div class="polaroid"><div class="frame">photo 2</div><span class="cap">[caption]</span></div>
-    <div class="polaroid"><div class="frame">photo 3</div><span class="cap">[caption]</span></div>
+
+ <div class="photos">
+
+  <!-- Photo 1 -->
+  <div class="polaroid">
+    <div class="frame">
+      <img class="photo front" src="AnisKhai/Polaroid1_OFD1.JPG" alt="Our First Date">
+      <img class="photo back" src="AnisKhai/Polaroid1_OFD2.JPG" alt="Our First Date 2">
+    </div>
+    <span class="cap">Our First Date ❤️</span>
   </div>
 
-  <div class="signoff">— Khairul Afzan </div>
+  <!-- Photo 2 -->
+  <div class="polaroid">
+    <div class="frame">
+      <img class="photo front" src="AnisKhai/Polaroid2_FM1.JPG" alt="Favorite Memory">
+      <img class="photo back" src="AnisKhai/Polaroid2_FM2.JPG" alt="Favorite Memory 2">
+    </div>
+    <span class="cap">Favorite Memory 🥰</span>
+  </div>
+
+  <!-- Photo 3 -->
+  <div class="polaroid">
+    <div class="frame">
+      <img class="photo front" src="AnisKhai/Polaroid3_AF1.JPG" alt="Forever & Always">
+      <img class="photo back" src="AnisKhai/Polaroid3_AF2.JPG" alt="Forever & Always 2">
+    </div>
+    <span class="cap"> Always Forever 😇</span>
+  </div>
+
+  <!-- Photo 4 -->
+  <div class="polaroid">
+    <div class="frame">
+      <img class="photo front" src="AnisKhai/Promise1.JPG" alt="Forever & Always">
+      <img class="photo back" src="AnisKhai/KAkiss1.JPG" alt="Forever & Always 2">
+    </div>
+    <span class="cap"> Our Promise 👩‍❤️‍👨💋 </span>
+  </div>
+
+ <!-- Photo 5 -->
+  <div class="polaroid">
+    <div class="frame">
+      <img class="photo front" src="AnisKhai/Promise2.JPG" alt="Forever & Always">
+      <img class="photo back" src="AnisKhai/KAkiss2.JPG" alt="Forever & Always 2">
+    </div>
+    <span class="cap"> Our Promise 👩‍❤️‍👨💋 </span>
+  </div>
+
+</div>
+
+
+  <div class="signoff"> — Khairul Afzan </div>
 
   <div class="more-wrap">
     <button class="more-btn" id="toGallery">our story so far →</button>
@@ -541,37 +802,225 @@
 </div>
 
 
+
 <div class="gallery-page" id="galleryPage">
-  <div class="eyebrow">every moment</div>
-  <h1 class="title gallery-title">Our Story</h1>
+  <div class="eyebrow"> a little moment we spend together </div>
+  <h1 class="title gallery-title">Our Tiny Gallery</h1>
   <div class="divider"></div>
 
   <div class="gallery-grid">
-    <div class="g-item">
-      <div class="g-frame">photo</div>
-      <p class="g-text"><span class="placeholder">[caption or short memory about this photo]</span></p>
+
+<!-- Gallery 1 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery0" src="AnisKhai/G1_1.jpg" alt="Gallery 1">
     </div>
-    <div class="g-item">
-      <div class="g-frame">photo</div>
-      <p class="g-text"><span class="placeholder">[caption or short memory about this photo]</span></p>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(0,-1)">❮</button>
+        <p class="g-text"> Our first date ❤️ </p>
+        <button class="g-nav" onclick="changeGallery(0,1)">❯</button>
     </div>
-    <div class="g-item">
-      <div class="g-frame">photo</div>
-      <p class="g-text"><span class="placeholder">[caption or short memory about this photo]</span></p>
+</div>
+
+
+<!-- Gallery 2 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery1" src="AnisKhai/G2_1.jpg" alt="Gallery 2">
     </div>
-    <div class="g-item">
-      <div class="g-frame">photo</div>
-      <p class="g-text"><span class="placeholder">[caption or short memory about this photo]</span></p>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(1,-1)">❮</button>
+        <p class="g-text"> Favorite person 👩‍❤️‍👨 </p>
+        <button class="g-nav" onclick="changeGallery(1,1)">❯</button>
     </div>
-    <div class="g-item">
-      <div class="g-frame">photo</div>
-      <p class="g-text"><span class="placeholder">[caption or short memory about this photo]</span></p>
+</div>
+
+
+<!-- Gallery 3 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery2" src="AnisKhai/G3_1.jpg" alt="Gallery 3">
     </div>
-    <div class="g-item">
-      <div class="g-frame">photo</div>
-      <p class="g-text"><span class="placeholder">[caption or short memory about this photo]</span></p>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(2,-1)">❮</button>
+        <p class="g-text"> Favorite memory 🥰 </p>
+        <button class="g-nav" onclick="changeGallery(2,1)">❯</button>
     </div>
-  </div>
+</div>
+
+
+<!-- Gallery 4 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery3" src="AnisKhai/G4_1.jpg" alt="Gallery 4">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(3,-1)">❮</button>
+        <p class="g-text"> Our adventures 🌍 </p>
+        <button class="g-nav" onclick="changeGallery(3,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 5 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery4" src="AnisKhai/G5_1.jpg" alt="Gallery 5">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(4,-1)">❮</button>
+        <p class="g-text"> Sweet memories 💖 </p>
+        <button class="g-nav" onclick="changeGallery(4,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 6 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery5" src="AnisKhai/G6_1.jpg" alt="Gallery 6">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(5,-1)">❮</button>
+        <p class="g-text"> With you always 🤗 </p>
+        <button class="g-nav" onclick="changeGallery(5,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 7 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery6" src="AnisKhai/G7_1.jpg" alt="Gallery 7">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(6,-1)">❮</button>
+        <p class="g-text"> Still choosing you 😊 </p>
+        <button class="g-nav" onclick="changeGallery(6,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 8 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery7" src="AnisKhai/G8_1.jpg" alt="Gallery 8">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(7,-1)">❮</button>
+        <p class="g-text"> Special moments 💕 </p>
+        <button class="g-nav" onclick="changeGallery(7,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 9 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery8" src="AnisKhai/G9_1.jpg" alt="Gallery 9">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(8,-1)">❮</button>
+        <p class="g-text"> Forever together 😇 </p>
+        <button class="g-nav" onclick="changeGallery(8,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 10 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery9" src="AnisKhai/G10_1.jpg" alt="Gallery 9">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(9,-1)">❮</button>
+        <p class="g-text"> Lucky to have you 😇 </p>
+        <button class="g-nav" onclick="changeGallery(9,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 11 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery10" src="AnisKhai/G11_1.jpg" alt="Gallery 11">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(10,-1)">❮</button>
+        <p class="g-text"> Love lives here 💗 </p>
+        <button class="g-nav" onclick="changeGallery(10,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 12 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery11" src="AnisKhai/G12_1.jpg" alt="Gallery 12">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(11,-1)">❮</button>
+        <p class="g-text"> Loves starts here ☺️ </p>
+        <button class="g-nav" onclick="changeGallery(11,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 13 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery12" src="AnisKhai/G13_1.jpg" alt="Gallery 13">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(12,-1)">❮</button>
+        <p class="g-text"> Better together 😍 </p>
+        <button class="g-nav" onclick="changeGallery(12,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 14 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery13" src="AnisKhai/G14_1.jpg" alt="Gallery 14">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(13,-1)">❮</button>
+        <p class="g-text"> Feel like home 🥰 </p>
+        <button class="g-nav" onclick="changeGallery(13,1)">❯</button>
+    </div>
+</div>
+
+
+<!-- Gallery 15 -->
+<div class="g-item">
+    <div class="g-frame">
+        <img id="gallery14" src="AnisKhai/G15_1.jpg" alt="Gallery 15">
+    </div>
+
+    <div class="g-footer">
+        <button class="g-nav" onclick="changeGallery(14,-1)">❮</button>
+        <p class="g-text"> Loves, enough 😘 </p>
+        <button class="g-nav" onclick="changeGallery(14,1)">❯</button>
+    </div>
+</div>
+
+
+</div>
 
   <div class="more-wrap">
     <button class="more-btn" id="toLetter">← back to the letter</button>
@@ -603,6 +1052,7 @@
   envelopeWrap.addEventListener('click', () => {
     if(envelope.classList.contains('open')) return;
     envelope.classList.add('open');
+    playMusic();
     setTimeout(() => {
       stage.classList.add('fade-out');
       setTimeout(() => {
@@ -610,6 +1060,30 @@
         letterPage.classList.add('show');
       }, 550);
     }, 1000);
+  });
+
+  // ---------- background music ----------
+  const bgMusic = document.getElementById('bgMusic');
+  const musicToggle = document.getElementById('musicToggle');
+  bgMusic.volume = 0.5;
+
+  function playMusic(){
+    bgMusic.play().then(() => {
+      musicToggle.classList.add('playing');
+      musicToggle.textContent = '♪';
+    }).catch(() => {
+      // autoplay blocked; user can start it manually via the toggle button
+    });
+  }
+
+  musicToggle.addEventListener('click', () => {
+    if(bgMusic.paused){
+      playMusic();
+    } else {
+      bgMusic.pause();
+      musicToggle.classList.remove('playing');
+      musicToggle.textContent = '♪';
+    }
   });
 
   // navigation between letter and gallery
@@ -634,6 +1108,185 @@
     requestAnimationFrame(() => { stage.classList.remove('fade-out'); });
     window.scrollTo({top:0, behavior:'smooth'});
   });
+
+
+const galleries = [
+    // Gallery 1
+    [
+        "AnisKhai/G1_1.jpg",
+        "AnisKhai/G1_2.jpg",
+        "AnisKhai/G1_3.jpg",
+	"AnisKhai/G1_4.jpg",
+	"AnisKhai/G1_5.jpg",
+	"AnisKhai/G1_6.jpg"
+    ],
+
+    // Gallery 2
+    [
+        "AnisKhai/G2_1.jpg",
+        "AnisKhai/G2_2.jpg",
+        "AnisKhai/G2_3.jpg",
+	"AnisKhai/G2_4.jpg",
+	"AnisKhai/G2_5.jpg",
+	"AnisKhai/G2_6.jpg"
+    ],
+
+    // Gallery 3
+    [
+        "AnisKhai/G3_1.jpg",
+        "AnisKhai/G3_2.jpg",
+	"AnisKhai/G3_3.jpg",
+	"AnisKhai/G3_4.jpg",
+	"AnisKhai/G3_5.jpg",
+        "AnisKhai/G3_6.jpg"
+    ],
+
+    // Gallery 4
+    [
+        "AnisKhai/G4_1.jpg",
+        "AnisKhai/G4_2.jpg",
+        "AnisKhai/G4_3.jpg",
+	"AnisKhai/G4_4.jpg",
+	"AnisKhai/G4_5.jpg",
+	"AnisKhai/G4_6.jpg",
+    ],
+
+    // Gallery 5
+    [
+        "AnisKhai/G5_1.jpg",
+        "AnisKhai/G5_2.jpg",
+        "AnisKhai/G5_3.jpg",
+	"AnisKhai/G5_4.jpg",
+	"AnisKhai/G5_5.jpg",
+	"AnisKhai/G5_6.jpg"
+    ],
+
+    // Gallery 6
+    [
+        "AnisKhai/G6_1.jpg",
+        "AnisKhai/G6_2.jpg",
+	"AnisKhai/G6_3.jpg",
+	"AnisKhai/G6_4.jpg",
+	"AnisKhai/G6_5.jpg",
+        "AnisKhai/G6_6.jpg"
+    ],
+
+    // Gallery 7
+    [
+        "AnisKhai/G7_1.jpg",
+        "AnisKhai/G7_2.jpg",
+        "AnisKhai/G7_3.jpg",
+	"AnisKhai/G7_4.jpg",
+	"AnisKhai/G7_5.jpg",
+	"AnisKhai/G7_6.jpg"
+    ],
+
+   // Gallery 8
+   [
+    	"AnisKhai/G8_1.jpg",
+    	"AnisKhai/G8_2.jpg",
+    	"AnisKhai/G8_3.jpg",
+    	"AnisKhai/G8_4.jpg",
+    	"AnisKhai/G8_5.jpg",
+    	"AnisKhai/G8_6.jpg"
+   ],
+
+   // Gallery 9
+   [
+    	"AnisKhai/G9_1.jpg",
+   	"AnisKhai/G9_2.jpg",
+    	"AnisKhai/G9_3.jpg",
+    	"AnisKhai/G9_4.jpg",
+    	"AnisKhai/G9_5.jpg",
+    	"AnisKhai/G9_6.jpg"
+   ],
+
+
+   // Gallery 10
+   [
+    	"AnisKhai/G10_1.jpg",
+   	"AnisKhai/G10_2.jpg",
+    	"AnisKhai/G10_3.jpg",
+    	"AnisKhai/G10_4.jpg",
+    	"AnisKhai/G10_5.jpg",
+    	"AnisKhai/G10_6.jpg"
+   ],
+
+
+   // Gallery 11
+   [
+    	"AnisKhai/G11_1.jpg",
+   	"AnisKhai/G11_2.jpg",
+    	"AnisKhai/G11_3.jpg",
+    	"AnisKhai/G11_4.jpg",
+    	"AnisKhai/G11_5.jpg",
+    	"AnisKhai/G11_6.jpg"
+   ],
+
+
+   // Gallery 12
+   [
+    	"AnisKhai/G12_1.jpg",
+   	"AnisKhai/G12_2.jpg",
+    	"AnisKhai/G12_3.jpg",
+    	"AnisKhai/G12_4.jpg",
+    	"AnisKhai/G12_5.jpg",
+    	"AnisKhai/G12_6.jpg"
+   ],
+
+
+   // Gallery 13
+   [
+    	"AnisKhai/G13_1.jpg",
+   	"AnisKhai/G13_2.jpg",
+    	"AnisKhai/G13_3.jpg",
+    	"AnisKhai/G13_4.jpg",
+    	"AnisKhai/G13_5.jpg",
+    	"AnisKhai/G13_6.jpg"
+   ],
+
+
+   // Gallery 14
+   [
+    	"AnisKhai/G14_1.jpg",
+   	"AnisKhai/G14_2.jpg",
+    	"AnisKhai/G14_3.jpg",
+    	"AnisKhai/G14_4.jpg",
+    	"AnisKhai/G14_5.jpg",
+    	"AnisKhai/G14_6.jpg"
+   ],
+
+
+   // Gallery 15
+   [
+    	"AnisKhai/G15_1.jpg",
+   	"AnisKhai/G15_2.jpg",
+    	"AnisKhai/G15_3.jpg",
+    	"AnisKhai/G15_4.jpg",
+    	"AnisKhai/G15_5.jpg",
+    	"AnisKhai/G15_6.jpg"
+   ],
+];
+
+const currentIndex = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+function changeGallery(gallery, direction) {
+
+    currentIndex[gallery] += direction;
+
+    if (currentIndex[gallery] < 0) {
+        currentIndex[gallery] = galleries[gallery].length - 1;
+    }
+
+    if (currentIndex[gallery] >= galleries[gallery].length) {
+        currentIndex[gallery] = 0;
+    }
+
+    document.getElementById("gallery" + gallery).src =
+        galleries[gallery][currentIndex[gallery]];
+}
+
+
 </script>
 
 </body>
