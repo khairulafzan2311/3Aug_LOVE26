@@ -81,158 +81,158 @@
 const galleries = [
     // Gallery 1
     [
-        "AnisKhai/G1_1.PNG",
-        "AnisKhai/G1_2.PNG",
-        "AnisKhai/G1_3.PNG",
-	"AnisKhai/G1_4.PNG",
-	"AnisKhai/G1_5.PNG",
-	"AnisKhai/G1_6.PNG"
+        "AnisKhai/G1_1.png",
+        "AnisKhai/G1_2.png",
+        "AnisKhai/G1_3.png",
+	"AnisKhai/G1_4.png",
+	"AnisKhai/G1_5.png",
+	"AnisKhai/G1_6.png"
     ],
 
     // Gallery 2
     [
-        "AnisKhai/G2_1.PNG",
-        "AnisKhai/G2_2.PNG",
-        "AnisKhai/G2_3.PNG",
-	"AnisKhai/G2_4.PNG",
-	"AnisKhai/G2_5.PNG",
-	"AnisKhai/G2_6.PNG"
+        "AnisKhai/G2_1.png",
+        "AnisKhai/G2_2.png",
+        "AnisKhai/G2_3.png",
+	"AnisKhai/G2_4.png",
+	"AnisKhai/G2_5.png",
+	"AnisKhai/G2_6.png"
     ],
 
     // Gallery 3
     [
-        "AnisKhai/G3_1.PNG",
-        "AnisKhai/G3_2.PNG",
-	"AnisKhai/G3_3.PNG",
-	"AnisKhai/G3_4.PNG",
-	"AnisKhai/G3_5.PNG",
-        "AnisKhai/G3_6.PNG"
+        "AnisKhai/G3_1.png",
+        "AnisKhai/G3_2.png",
+	"AnisKhai/G3_3.png",
+	"AnisKhai/G3_4.png",
+	"AnisKhai/G3_5.png",
+        "AnisKhai/G3_6.png"
     ],
 
     // Gallery 4
     [
-        "AnisKhai/G4_1.PNG",
-        "AnisKhai/G4_2.PNG",
-        "AnisKhai/G4_3.PNG",
-	"AnisKhai/G4_4.PNG",
-	"AnisKhai/G4_5.PNG",
-	"AnisKhai/G4_6.PNG",
+        "AnisKhai/G4_1.png",
+        "AnisKhai/G4_2.png",
+        "AnisKhai/G4_3.png",
+	"AnisKhai/G4_4.png",
+	"AnisKhai/G4_5.png",
+	"AnisKhai/G4_6.png",
     ],
 
     // Gallery 5
     [
-        "AnisKhai/G5_1.PNG",
-        "AnisKhai/G5_2.PNG",
-        "AnisKhai/G5_3.PNG",
-	"AnisKhai/G5_4.PNG",
-	"AnisKhai/G5_5.PNG",
-	"AnisKhai/G5_6.PNG"
+        "AnisKhai/G5_1.png",
+        "AnisKhai/G5_2.png",
+        "AnisKhai/G5_3.png",
+	"AnisKhai/G5_4.png",
+	"AnisKhai/G5_5.png",
+	"AnisKhai/G5_6.png"
     ],
 
     // Gallery 6
     [
-        "AnisKhai/G6_1.PNG",
-        "AnisKhai/G6_2.PNG",
-	"AnisKhai/G6_3.PNG",
-	"AnisKhai/G6_4.PNG",
-	"AnisKhai/G6_5.PNG",
-        "AnisKhai/G6_6.PNG"
+        "AnisKhai/G6_1.png",
+        "AnisKhai/G6_2.png",
+	"AnisKhai/G6_3.png",
+	"AnisKhai/G6_4.png",
+	"AnisKhai/G6_5.png",
+        "AnisKhai/G6_6.png"
     ],
 
     // Gallery 7
     [
-        "AnisKhai/G7_1.PNG",
-        "AnisKhai/G7_2.PNG",
-        "AnisKhai/G7_3.PNG",
-	"AnisKhai/G7_4.PNG",
-	"AnisKhai/G7_5.PNG",
-	"AnisKhai/G7_6.PNG"
+        "AnisKhai/G7_1.png",
+        "AnisKhai/G7_2.png",
+        "AnisKhai/G7_3.png",
+	"AnisKhai/G7_4.png",
+	"AnisKhai/G7_5.png",
+	"AnisKhai/G7_6.png"
     ],
 
    // Gallery 8
    [
-    	"AnisKhai/G8_1.PNG",
-    	"AnisKhai/G8_2.PNG",
-    	"AnisKhai/G8_3.PNG",
-    	"AnisKhai/G8_4.PNG",
-    	"AnisKhai/G8_5.PNG",
-    	"AnisKhai/G8_6.PNG"
+    	"AnisKhai/G8_1.png",
+    	"AnisKhai/G8_2.png",
+    	"AnisKhai/G8_3.png",
+    	"AnisKhai/G8_4.png",
+    	"AnisKhai/G8_5.png",
+    	"AnisKhai/G8_6.png"
    ],
 
    // Gallery 9
    [
-    	"AnisKhai/G9_1.PNG",
-   	"AnisKhai/G9_2.PNG",
-    	"AnisKhai/G9_3.PNG",
-    	"AnisKhai/G9_4.PNG",
-    	"AnisKhai/G9_5.PNG",
-    	"AnisKhai/G9_6.PNG"
+    	"AnisKhai/G9_1.png",
+   	"AnisKhai/G9_2.png",
+    	"AnisKhai/G9_3.png",
+    	"AnisKhai/G9_4.png",
+    	"AnisKhai/G9_5.png",
+    	"AnisKhai/G9_6.png"
    ],
 
 
    // Gallery 10
    [
-    	"AnisKhai/G10_1.PNG",
-   	"AnisKhai/G10_2.PNG",
-    	"AnisKhai/G10_3.PNG",
-    	"AnisKhai/G10_4.PNG",
-    	"AnisKhai/G10_5.PNG",
-    	"AnisKhai/G10_6.PNG"
+    	"AnisKhai/G10_1.png",
+   	"AnisKhai/G10_2.png",
+    	"AnisKhai/G10_3.png",
+    	"AnisKhai/G10_4.png",
+    	"AnisKhai/G10_5.png",
+    	"AnisKhai/G10_6.png"
    ],
 
 
    // Gallery 11
    [
-    	"AnisKhai/G11_1.PNG",
-   	"AnisKhai/G11_2.PNG",
-    	"AnisKhai/G11_3.PNG",
-    	"AnisKhai/G11_4.PNG",
-    	"AnisKhai/G11_5.PNG",
-    	"AnisKhai/G11_6.PNG"
+    	"AnisKhai/G11_1.png",
+   	"AnisKhai/G11_2.png",
+    	"AnisKhai/G11_3.png",
+    	"AnisKhai/G11_4.png",
+    	"AnisKhai/G11_5.png",
+    	"AnisKhai/G11_6.png"
    ],
 
 
    // Gallery 12
    [
-    	"AnisKhai/G12_1.PNG",
-   	"AnisKhai/G12_2.PNG",
-    	"AnisKhai/G12_3.PNG",
-    	"AnisKhai/G12_4.PNG",
-    	"AnisKhai/G12_5.PNG",
-    	"AnisKhai/G12_6.PNG"
+    	"AnisKhai/G12_1.png",
+   	"AnisKhai/G12_2.png",
+    	"AnisKhai/G12_3.png",
+    	"AnisKhai/G12_4.png",
+    	"AnisKhai/G12_5.png",
+    	"AnisKhai/G12_6.png"
    ],
 
 
    // Gallery 13
    [
-    	"AnisKhai/G13_1.PNG",
-   	"AnisKhai/G13_2.PNG",
-    	"AnisKhai/G13_3.PNG",
-    	"AnisKhai/G13_4.PNG",
-    	"AnisKhai/G13_5.PNG",
-    	"AnisKhai/G13_6.PNG"
+    	"AnisKhai/G13_1.png",
+   	"AnisKhai/G13_2.png",
+    	"AnisKhai/G13_3.png",
+    	"AnisKhai/G13_4.png",
+    	"AnisKhai/G13_5.png",
+    	"AnisKhai/G13_6.png"
    ],
 
 
    // Gallery 14
    [
-    	"AnisKhai/G14_1.PNG",
-   	"AnisKhai/G14_2.PNG",
-    	"AnisKhai/G14_3.PNG",
-    	"AnisKhai/G14_4.PNG",
-    	"AnisKhai/G14_5.PNG",
-    	"AnisKhai/G14_6.PNG"
+    	"AnisKhai/G14_1.png",
+   	"AnisKhai/G14_2.png",
+    	"AnisKhai/G14_3.png",
+    	"AnisKhai/G14_4.png",
+    	"AnisKhai/G14_5.png",
+    	"AnisKhai/G14_6.png"
    ],
 
 
    // Gallery 15
    [
-    	"AnisKhai/G15_1.PNG",
-   	"AnisKhai/G15_2.PNG",
-    	"AnisKhai/G15_3.PNG",
-    	"AnisKhai/G15_4.PNG",
-    	"AnisKhai/G15_5.PNG",
-    	"AnisKhai/G15_6.PNG"
+    	"AnisKhai/G15_1.png",
+   	"AnisKhai/G15_2.png",
+    	"AnisKhai/G15_3.png",
+    	"AnisKhai/G15_4.png",
+    	"AnisKhai/G15_5.png",
+    	"AnisKhai/G15_6.png"
    ],
 ];
 
