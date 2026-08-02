@@ -89,6 +89,11 @@
         align-items:flex-start;
         padding-top:38vh;
     }
+    .letter-page,
+    .gallery-page{
+        background:transparent;
+        box-shadow:none;
+    }
 }
 
 .envelope{
