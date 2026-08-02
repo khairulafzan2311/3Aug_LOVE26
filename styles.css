@@ -89,11 +89,6 @@
         align-items:flex-start;
         padding-top:38vh;
     }
-    .letter-page,
-    .gallery-page{
-        background:transparent;
-        box-shadow:none;
-    }
 }
 
 .envelope{
@@ -616,3 +611,16 @@
   }
   .music-toggle.playing{ animation:spin 6s linear infinite; }
   @keyframes spin{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+
+  /* ---------- MOBILE: transparent letter/gallery card ----------
+     Placed at the very end of the stylesheet on purpose: this rule
+     has the same specificity as the base .letter-page/.gallery-page
+     rule above, so CSS cascade order decides the winner. Keeping it
+     last guarantees it overrides the ivory background on mobile. */
+  @media (max-width:768px){
+    .letter-page,
+    .gallery-page{
+        background:transparent;
+        box-shadow:none;
+    }
+  }
