@@ -17,6 +17,7 @@
     color:var(--ivory);
     overflow-x:hidden;
     position:relative;
+    touch-action:manipulation; /* stop double-tap-to-zoom on tap/scroll */
   }
 
   /* full-page background photo — replace the src below with your own image */
