@@ -1,3 +1,14 @@
+  // Lock the background photo's height to the viewport size captured right
+  // now, instead of letting it recompute on every scroll. Mobile browsers
+  // fire 'resize' when their address bar hides/shows during scroll, which is
+  // exactly what caused the background to appear to zoom — so we only
+  // recalculate on a real orientation change, not on scroll-triggered resizes.
+  function setStableViewportHeight(){
+    document.documentElement.style.setProperty('--vh', window.innerHeight + 'px');
+  }
+  setStableViewportHeight();
+  window.addEventListener('orientationchange', setStableViewportHeight);
+
   // ambient petals
   const petalContainer = document.getElementById('petals');
   const petalCount = 18;
@@ -16,7 +27,6 @@
   const envelopeWrap = document.getElementById('envelopeWrap');
   const letterPage = document.getElementById('letterPage');
   const stage = document.getElementById('stage');
-  const scrollWrapper = document.getElementById('scrollWrapper');
 
   envelopeWrap.addEventListener('click', () => {
     if(envelope.classList.contains('open')) return;
@@ -61,12 +71,12 @@
   document.getElementById('toGallery').addEventListener('click', () => {
     letterPageEl.classList.remove('show');
     galleryPage.classList.add('show');
-    scrollWrapper.scrollTo({top:0, behavior:'smooth'});
+    window.scrollTo({top:0, behavior:'smooth'});
   });
   document.getElementById('toLetter').addEventListener('click', () => {
     galleryPage.classList.remove('show');
     letterPageEl.classList.add('show');
-    scrollWrapper.scrollTo({top:0, behavior:'smooth'});
+    window.scrollTo({top:0, behavior:'smooth'});
   });
 
   document.getElementById('toEnvelope').addEventListener('click', () => {
@@ -75,7 +85,7 @@
     envelope.classList.remove('open');
     stage.classList.remove('hidden');
     requestAnimationFrame(() => { stage.classList.remove('fade-out'); });
-    scrollWrapper.scrollTo({top:0, behavior:'smooth'});
+    window.scrollTo({top:0, behavior:'smooth'});
   });
 
 
