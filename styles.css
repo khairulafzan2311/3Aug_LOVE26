@@ -612,15 +612,63 @@
   .music-toggle.playing{ animation:spin 6s linear infinite; }
   @keyframes spin{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
 
-  /* ---------- MOBILE: transparent letter/gallery card ----------
-     Placed at the very end of the stylesheet on purpose: this rule
-     has the same specificity as the base .letter-page/.gallery-page
-     rule above, so CSS cascade order decides the winner. Keeping it
-     last guarantees it overrides the ivory background on mobile. */
+  /* ---------- MOBILE: soft dark gradient behind letter/gallery text ----------
+     Placed at the very end of the stylesheet on purpose: these rules
+     have the same specificity as the base rules above, so CSS cascade
+     order decides the winner. Keeping this block last guarantees it
+     overrides the ivory card + dark text on mobile.
+     The scrim fades in/out top and bottom so it blends into the photo
+     background instead of reading as a hard box; text switches to the
+     light ivory/gold palette so it stays legible against the dark scrim. */
   @media (max-width:768px){
     .letter-page,
     .gallery-page{
-        background:transparent;
+        background:linear-gradient(
+            180deg,
+            rgba(20,8,10,0) 0%,
+            rgba(20,8,10,0.6) 10%,
+            rgba(20,8,10,0.78) 45%,
+            rgba(20,8,10,0.78) 65%,
+            rgba(20,8,10,0.55) 88%,
+            rgba(20,8,10,0) 100%
+        );
         box-shadow:none;
+        color:var(--ivory);
+    }
+
+    .letter-page .eyebrow,
+    .gallery-page .eyebrow{
+        color:var(--gold-soft);
+    }
+
+    .letter-page h1.title,
+    .gallery-page h1.title,
+    .letter-page .signoff{
+        color:var(--gold-soft);
+    }
+
+    .letter-page .body-text,
+    .letter-page .letter div{
+        color:var(--ivory);
+    }
+
+    .letter-page .body-text .placeholder{
+        background:rgba(0,0,0,0.3);
+        color:var(--ivory);
+    }
+
+    .letter-page .heart{
+        color:var(--rose);
+    }
+
+    .letter-page .more-btn,
+    .gallery-page .more-btn{
+        border-color:rgba(244,233,221,0.45);
+        color:var(--ivory);
+    }
+    .letter-page .more-btn:hover,
+    .gallery-page .more-btn:hover{
+        background:var(--ivory);
+        color:#2b1016;
     }
   }
