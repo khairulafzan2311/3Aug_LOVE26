@@ -132,7 +132,7 @@
 @media (max-width:768px){
     .stage{
         align-items:flex-start;
-        padding-top:5vh;
+        padding-top:20vh;
     }
 }
 
@@ -668,7 +668,7 @@
   .music-toggle.playing{ animation:spin 6s linear infinite; }
   @keyframes spin{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
 
-  /* ---------- MOBILE: soft dark gradient behind letter/gallery text ---------- */
+  /* ---------- MOBILE: soft cream gradient behind letter/gallery text ---------- */
   @media (max-width:768px){
     .letter-page,
     .gallery-page{
@@ -676,36 +676,36 @@
         padding:8vw 6vw;
         background:linear-gradient(
             180deg,
-            rgba(20,8,10,0) 0%,
-            rgba(20,8,10,0.6) 10%,
-            rgba(20,8,10,0.78) 45%,
-            rgba(20,8,10,0.78) 65%,
-            rgba(20,8,10,0.55) 88%,
-            rgba(20,8,10,0) 100%
+            rgba(244,233,221,0) 0%,
+            rgba(244,233,221,0.35) 10%,
+            rgba(244,233,221,0.65) 45%,
+            rgba(244,233,221,0.65) 65%,
+            rgba(244,233,221,0.35) 88%,
+            rgba(244,233,221,0) 100%
         );
         box-shadow:none;
-        color:var(--ivory);
+        color:#2b1016;
     }
 
     .letter-page .eyebrow,
     .gallery-page .eyebrow{
-        color:var(--gold-soft);
+        color:var(--rose);
     }
 
     .letter-page h1.title,
     .gallery-page h1.title,
     .letter-page .signoff{
-        color:var(--gold-soft);
+        color:#6e1f22;
     }
 
     .letter-page .body-text,
     .letter-page .letter div{
-        color:var(--ivory);
+        color:#2b1016;
     }
 
     .letter-page .body-text .placeholder{
-        background:rgba(0,0,0,0.3);
-        color:var(--ivory);
+        background:rgba(201,161,90,0.25);
+        color:#2b1016;
     }
 
     .letter-page .heart{
@@ -714,12 +714,12 @@
 
     .letter-page .more-btn,
     .gallery-page .more-btn{
-        border-color:rgba(244,233,221,0.45);
-        color:var(--ivory);
+        border-color:rgba(110,31,34,0.4);
+        color:#6e1f22;
     }
     .letter-page .more-btn:hover,
     .gallery-page .more-btn:hover{
-        background:var(--ivory);
-        color:#2b1016;
+        background:#6e1f22;
+        color:var(--ivory);
     }
   }
