@@ -563,6 +563,15 @@
     display:block;
 }
 
+@media (max-width:768px){
+  .g-frame{
+      height:450px;   /* your mobile height */
+  }
+  .gallery-grid{
+      grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); /* your mobile width */
+  }
+}
+
 /* ---------- FOOTER ---------- */
 
 .g-footer{
@@ -653,14 +662,7 @@
   .music-toggle.playing{ animation:spin 6s linear infinite; }
   @keyframes spin{ from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
 
-  /* ---------- MOBILE: soft dark gradient behind letter/gallery text ----------
-     Placed at the very end of the stylesheet on purpose: these rules
-     have the same specificity as the base rules above, so CSS cascade
-     order decides the winner. Keeping this block last guarantees it
-     overrides the ivory card + dark text on mobile.
-     The scrim fades in/out top and bottom so it blends into the photo
-     background instead of reading as a hard box; text switches to the
-     light ivory/gold palette so it stays legible against the dark scrim. */
+  /* ---------- MOBILE: soft dark gradient behind letter/gallery text ---------- */
   @media (max-width:768px){
     .letter-page,
     .gallery-page{
