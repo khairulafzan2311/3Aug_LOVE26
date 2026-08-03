@@ -132,7 +132,7 @@
 @media (max-width:768px){
     .stage{
         align-items:flex-start;
-        padding-top:15vh;
+        padding-top:5vh;
     }
 }
 
